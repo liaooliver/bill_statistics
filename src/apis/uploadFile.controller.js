@@ -13,7 +13,8 @@ router.post('', uploadFile.single("file"), async (request, response) => {
     const cleansing_result = await cleansingFile(result);
 
     // 3.get header row
-    const keys = Object.keys(cleansing_result[0]);
+    let keys = Object.keys(cleansing_result[0]);
+    keys = [...keys, '金額調整'];
 
     // 4.save file data
     await addsheetToGoogleSheet(keys, cleansing_result);

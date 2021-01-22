@@ -27,7 +27,7 @@ router.get('', async function (requset, response) {
             return rowObj;
         });
 
-        response.statusCode(200).json({ result: rows_list });
+        response.status(200).json({ result: rows_list });
     });
 
 });

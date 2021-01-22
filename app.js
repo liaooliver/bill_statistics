@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3001;
 
 require('dotenv').config();
 
@@ -24,8 +24,8 @@ app.get("/", (request, response) => {
 
 
 app.use('/uploadFile', uploadFile);
+app.use('/readSheet', readSheet);
 app.use('/updateSheet', updateSheet);
-app.use('/readFile', readSheet);
 
 
 
