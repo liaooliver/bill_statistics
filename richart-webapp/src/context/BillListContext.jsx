@@ -1,0 +1,35 @@
+// 1.import createContext
+import React, { createContext, useReducer } from 'react';
+// import { getBillList } from '../services/list';
+import FetchBillReduce from '../reducer/FetchBillReduce';
+
+// 2.Create Context Object
+export const BillListContext = createContext();
+
+// 3.Create a provider for components to consume and subscribe to changes
+export const BillListContextProvider = ({ children }) => {
+
+    // global state
+    const [billList, billListDispatch] = useReducer(FetchBillReduce, {
+        isloading: true,
+        isError: false,
+        message: "",
+        payload: null
+    })
+
+    const getBillList = async () => {
+        await fetch('http://localhost:3001/readSheet')
+            .then(response => response.json())
+            .then(response => {
+                const payload = response['result']
+                billListDispatch({ type: 'SUCCESS_FETCH', payload})
+            })
+            .catch(error => {
+                billListDispatch({ type: 'FAIL_FETCH', payload: error})
+            });
+    };
+
+    return (
+        <BillListContext.Provider value={{ billList, getBillList }}>{ children }</BillListContext.Provider>
+    )
+}
