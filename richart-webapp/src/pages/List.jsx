@@ -8,16 +8,11 @@ const List = () => {
     const { billList, getBillList } = useContext(BillListContext);
 
     useEffect(()=> {
-        getBillList()
-        console.log("billList => ", billList)
+        getBillList(0, 10);
     }, [])
 
     return (
-        !billList.isloading ?
-            <>
-                <Table billList={billList} />
-            </> : <p>Loading</p>
-
+        !billList.isloading ? <Table billList={billList} /> : <p>Loading</p>
     );
 }
 

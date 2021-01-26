@@ -14,18 +14,22 @@ export const BillListContextProvider = ({ children }) => {
         isloading: true,
         isError: false,
         message: "",
-        payload: null
+        payload: null,
+        page: null,
+        limit: null,
+        total: null,
+        totalPage: null
     })
 
-    const getBillList = async () => {
-        await fetch('http://localhost:3001/readSheet')
+    const getBillList = async (page = 0, limit = 10) => {
+        await fetch(`http://localhost:3001/readSheet?page=${page}&limit=${limit}`)
             .then(response => response.json())
             .then(response => {
-                const payload = response['result']
-                billListDispatch({ type: 'SUCCESS_FETCH', payload})
+                const payload = response;
+                billListDispatch({ type: 'SUCCESS_FETCH', payload });
             })
             .catch(error => {
-                billListDispatch({ type: 'FAIL_FETCH', payload: error})
+                billListDispatch({ type: 'FAIL_FETCH', payload: error });
             });
     };
 

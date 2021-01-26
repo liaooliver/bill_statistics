@@ -3,9 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams
+  Link
 } from "react-router-dom";
 import Import from './pages/Import';
 import List from './pages/List';
@@ -74,7 +72,7 @@ function App() {
           
           <main>
             <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-              <div className="px-4 py-6 sm:px-0">
+              <div className="px-4 sm:px-0">
                 <Switch>
                   <Route path="/list"> 
                     {/* use context provider */}

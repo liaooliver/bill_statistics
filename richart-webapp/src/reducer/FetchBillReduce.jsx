@@ -6,7 +6,11 @@ export default (state, { type, payload }) => {
                 isloading: false,
                 isError: false,
                 message: "",
-                payload: payload
+                payload: payload['result'],
+                page: payload['page'],
+                limit: payload['limit'],
+                total: payload['total'],
+                totalPage: payload['totalPage']
             };
         case 'FAIL_FETCH': 
             return {

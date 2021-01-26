@@ -1,35 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const { accessSpreadsheet } = require('../models/spreadsheet');
+const { getSheet ,pagination } = require('../services/data_handle');
 
 // read google sheet
-router.get('', async function (requset, response) {
-    
-    // connect google sheet
-    await accessSpreadsheet().then(async doc => {
-        
-        // connect doc
-        const sheets = doc.sheetsByTitle['newbill'];
+router.get('', async function (request, response) {
+    // get query
+    const { page, limit } = request.query;
 
-        // get row header
-        await sheets.loadHeaderRow();
-        const headerValues = sheets.headerValues;
+    // get sheet rows from google
+    const rows_list = await getSheet();
 
-        // get row content
-        const rows = await sheets.getRows();        
+    // make pagination
+    const { totalPage, total, result } = pagination(page, limit, rows_list);
 
-        // Reorganization row data
-        const rows_list = rows.map(row => {
-            const rowObj = {};
-            headerValues.forEach(head => {
-                rowObj[head] = row[head];
-            });
-            return rowObj;
-        });
-
-        response.status(200).json({ result: rows_list });
-    });
-
+    // response
+    response.status(200).json({ result: result, total, totalPage, page, limit });
 });
 
 module.exports = router;

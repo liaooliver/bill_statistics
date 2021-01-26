@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { InteractiveContext } from '../context/InteractiveContext';
+import Pagination from '../components/Pagination';
 
 const Table = ({ billList }) => {
 
@@ -65,6 +66,12 @@ const Table = ({ billList }) => {
                                     </tbody>
                                 </table>
                             </div>
+                            <Pagination
+                                total={billList.total}
+                                totalPage={billList.totalPage}
+                                page={billList.page}
+                                limit={billList.limit}
+                            />
                         </div>
                     </div>
                 </div>
