@@ -12,7 +12,7 @@ const List = () => {
     }, [])
 
     return (
-        !billList.isloading ? <Table billList={billList} /> : <p>Loading</p>
+        <Table billList={billList} />
     );
 }
 

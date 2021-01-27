@@ -5,7 +5,7 @@ const Pagination = ({ total, totalPage, page, limit }) => {
 
     const [items, setItems] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
-    const { getBillList } = useContext(BillListContext);
+    const { getBillList, reloadBill } = useContext(BillListContext);
 
     useEffect(() => {
         let tempItems = []
@@ -20,7 +20,7 @@ const Pagination = ({ total, totalPage, page, limit }) => {
     }, [totalPage, limit]);
     
     const changePage = (page) => {
-        getBillList(page, 10);
+        reloadBill(page, 10)
         const tempItems = [...items];
         tempItems.forEach(item => {
             item['current'] = false;

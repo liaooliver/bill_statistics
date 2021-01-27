@@ -14,7 +14,7 @@ export const BillListContextProvider = ({ children }) => {
         isloading: true,
         isError: false,
         message: "",
-        payload: null,
+        payload: [],
         page: null,
         limit: null,
         total: null,
@@ -33,7 +33,12 @@ export const BillListContextProvider = ({ children }) => {
             });
     };
 
+    const reloadBill = (page, limit) => {
+        billListDispatch({ type: 'RELOAD_FETCH' });
+        getBillList(page, limit);
+    }
+
     return (
-        <BillListContext.Provider value={{ billList, getBillList }}>{ children }</BillListContext.Provider>
+        <BillListContext.Provider value={{ billList, getBillList, reloadBill }}>{ children }</BillListContext.Provider>
     )
 }

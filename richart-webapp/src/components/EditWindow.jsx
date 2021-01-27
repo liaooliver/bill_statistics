@@ -8,10 +8,10 @@ const EditWindow = () => {
 
     const { openEditMode, setOpenEditMode } = useContext(InteractiveContext);
 
-    const maskEl = useRef(null);
+    let maskEl = useRef(null);
 
-    const mockClick = () => {
-        if (maskEl['current']['id'] === 'mask') {
+    const mockClick = (event) => {
+        if (event.target.id === 'mask') {
             setOpenEditMode(false);
         }
     }
@@ -19,9 +19,12 @@ const EditWindow = () => {
     return (
         <>
             {
-                openEditMode ? <div id="mask" className="fixed w-full h-screen overflow-auto bg-gray-400 bg-opacity-40" onClick={()=>mockClick()} ref={maskEl}>
-                    <EditTable />
-                </div> : null
+                openEditMode ?
+                    <div id="mask"
+                        className="fixed w-full h-screen overflow-auto bg-gray-400 bg-opacity-40 z-10"
+                        onClick={($event) => mockClick($event)} ref={el => maskEl = el}>
+                        <EditTable />
+                    </div> : null
             }
         </>
     );

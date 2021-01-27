@@ -25,6 +25,12 @@ const getSheet = async function () {
     });
 };
 
+/**
+* @param {string} page - current page
+* @param {string} limit - page of limit
+* @param {array} data - bill detail
+* @return {object} - return filtered data
+*/
 const pagination = function (page, limit, data) {
 
     const totalPage = Math.ceil(data.length / limit);

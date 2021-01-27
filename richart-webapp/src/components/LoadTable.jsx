@@ -1,9 +1,8 @@
 import React from 'react';
-import Pagination from '../components/Pagination';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 
-const Table = ({ billList }) => {
+const LoadTable = ({loading}) => {
     return (
         <div className="flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -11,22 +10,13 @@ const Table = ({ billList }) => {
                     <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table className="min-w-full divide-y divide-gray-200">
                             <TableHeader />
-                            <TableBody
-                                loading={billList.isloading}
-                                data={billList.payload}
-                            />
+                            <TableBody />
                         </table>
                     </div>
-                    <Pagination
-                        total={billList.total}
-                        totalPage={billList.totalPage}
-                        page={billList.page}
-                        limit={billList.limit}
-                    />
                 </div>
             </div>
         </div>
     );
 }
 
-export default Table;
+export default LoadTable;

@@ -12,12 +12,16 @@ export default (state, { type, payload }) => {
                 total: payload['total'],
                 totalPage: payload['totalPage']
             };
-        case 'FAIL_FETCH': 
+        case 'FAIL_FETCH':
             return {
                 isloading: false,
                 isError: false,
                 message: payload,
-                payload: null
+                payload: []
+            };
+        case 'RELOAD_FETCH': 
+            return {
+                ...state, isloading: true
             }
         default: return state;
     };

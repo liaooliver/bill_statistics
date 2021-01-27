@@ -73,23 +73,25 @@ function App() {
           <main>
             <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
               <div className="px-4 sm:px-0">
-                <Switch>
-                  <Route path="/list"> 
-                    {/* use context provider */}
-                    <BillListContextProvider>
-                      <List />
-                    </BillListContextProvider>  
-                  </Route>
-                  <Route path="/analysis">
-                      <div className="">帳單分析</div>
-                  </Route>
-                  <Route path="/import">
-                    <Import />
-                  </Route>
-                  <Route path="/">
-                      <div className=""></div>
-                  </Route>
-                </Switch>
+                <BillListContextProvider>
+                  <Switch>
+                    <Route path="/list"> 
+                      {/* use context provider */}
+                      
+                        <List />
+                      
+                    </Route>
+                    <Route path="/analysis">
+                        <div className="">帳單分析</div>
+                    </Route>
+                    <Route path="/import">
+                      <Import />
+                    </Route>
+                    <Route path="/">
+                        <div className=""></div>
+                    </Route>
+                  </Switch>
+                </BillListContextProvider>  
               </div>
             </div>
           </main>
