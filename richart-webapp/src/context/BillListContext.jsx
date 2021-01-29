@@ -13,13 +13,25 @@ export const BillListContextProvider = ({ children }) => {
     const [billList, billListDispatch] = useReducer(FetchBillReduce, {
         isloading: true,
         isError: false,
-        message: "",
+        message: null,
         payload: [],
         page: null,
         limit: null,
         total: null,
         totalPage: null
     })
+
+    const postBillFile = async (file) => {
+        const data = new FormData() 
+        data.append('file', file)
+        return await fetch(`http://localhost:3001/uploadFile`, {
+            method: 'POST',
+            body: data,
+            // headers: {
+            //     'Content-Type': 'multipart/form-data'
+            // }
+        }).then(response => response.json())
+    }
 
     const getBillList = async (page = 0, limit = 10) => {
         await fetch(`http://localhost:3001/readSheet?page=${page}&limit=${limit}`)
@@ -36,9 +48,25 @@ export const BillListContextProvider = ({ children }) => {
     const reloadBill = (page, limit) => {
         billListDispatch({ type: 'RELOAD_FETCH' });
         getBillList(page, limit);
-    }
+    };
+
+    const updateBill = async (data) => {
+        return await fetch('http://localhost:3001/updateSheet', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(response => response.json())
+    };
 
     return (
-        <BillListContext.Provider value={{ billList, getBillList, reloadBill }}>{ children }</BillListContext.Provider>
+        <BillListContext.Provider value={{
+            billList,
+            getBillList,
+            reloadBill,
+            updateBill,
+            postBillFile
+        }}>{children}</BillListContext.Provider>
     )
 }

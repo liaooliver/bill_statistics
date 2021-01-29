@@ -4,7 +4,7 @@ import './index.css';
 import App from './App.jsx';
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <React.StrictMode>
     <App />
   </React.StrictMode>,

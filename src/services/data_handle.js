@@ -32,7 +32,7 @@ const getSheet = async function () {
 * @return {object} - return filtered data
 */
 const pagination = function (page, limit, data) {
-
+    
     const totalPage = Math.ceil(data.length / limit);
     const total = data.length;
     // parse Int

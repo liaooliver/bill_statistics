@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { InteractiveContext } from '../context/InteractiveContext';
+import { displayNTD } from '../utils/currency';
 
-const LoadingRow = ({index}) => {
+const LoadingRow = () => {
     return (
-        <tr key={index}>
+        <tr>
             <td className="px-6 py-4 whitespace-nowrap">
                 <div className="w-full h-5 bg-gray-400 rounded"></div>
             </td>
@@ -32,9 +34,23 @@ const LoadingRow = ({index}) => {
     )
 }
 
-const RenderRow = ({data, index, setOpenEditMode}) => {
+const RenderRow = ({ data, activeEdit }) => {
+    
+    const colorObj = {
+        "吃飯":"badge-green",
+        "交通":"badge-blue",
+        "捐款":"badge-pink",
+        "3C":"badge-yellow",
+        "衣服":"badge-yellow",
+        "娛樂":"badge-yellow",
+        "旅遊":"badge-yellow",
+        "電話":"badge-purple",
+        "進修":"badge-blue",
+        "其他":"badge-red"        
+    }
+
     return (  
-        <tr key={index}>
+        <tr>
             <td className="px-6 py-4 whitespace-nowrap">
                 <div>{data['入帳日期']}</div>
             </td>
@@ -42,16 +58,16 @@ const RenderRow = ({data, index, setOpenEditMode}) => {
                 <div>{data['卡別']}</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div>{data['金額']}</div>
+                <div>{ displayNTD(data['金額']) }</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div>{data['isEdit']}</div>
+                <div>{ displayNTD(data['調整後金額']) }</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
                 <div>{data['消費明細']}</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                <span className={`${colorObj[data['類別']]}`}>
                     {data['類別']}
                 </span>
             </td>
@@ -59,7 +75,7 @@ const RenderRow = ({data, index, setOpenEditMode}) => {
                 {data['備忘錄']}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button onClick={()=> setOpenEditMode(true)} className="py-1 px-3 rounded bg-indigo-200 text-indigo-700 hover:text-indigo-100 hover:bg-indigo-600">編輯</button>
+                <button onClick={()=> activeEdit(data)} className="py-1 px-3 btn-outline-none btn-rounded btn-color-indigo">編輯</button>
             </td>
         </tr>
     )
@@ -67,23 +83,36 @@ const RenderRow = ({data, index, setOpenEditMode}) => {
 
 const TableBody = ({ loading, data }) => {
 
-    const [rows, setRows] = useState([])
-    const { setOpenEditMode } = useContext(InteractiveContext)
+    const [rows, setRows] = useState([]);
+    const { setOpenEditMode, setBillDetail } = useContext(InteractiveContext);
 
     useEffect(() => {
-        let rowsObj = []
+        
+        const activeEdit = (data) => {
+            setBillDetail(data)
+            setOpenEditMode(true)
+        }
 
         if (loading === true) {
+            let rowsObj = []
             for (let i = 0; i < 10; i++) {
-                rowsObj.push(<LoadingRow index={i} />);
+                rowsObj.push(<LoadingRow key={uuidv4()} />);
             }
             setRows(rowsObj)
         } else {
-            let renderObj = data && data.map((item, index) => <RenderRow data={item} index={index} setOpenEditMode={setOpenEditMode} />)
+            let renderObj = data && data.map((item) =>
+                <RenderRow
+                    key={uuidv4()}
+                    data={item}
+                    activeEdit={activeEdit}
+                />
+            )
             setRows(renderObj)
         }
 
-    },[loading])
+    }, [loading, data, setOpenEditMode, setBillDetail])
+    
+
 
     return (
         <tbody className={`bg-white divide-y divide-gray-200 ${loading ? "animate-pulse" : ""}`}>

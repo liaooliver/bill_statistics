@@ -14,12 +14,13 @@ router.post('', uploadFile.single("file"), async (request, response) => {
 
     // 3.get header row
     let keys = Object.keys(cleansing_result[0]);
-    keys = [...keys, '金額調整'];
+    keys = [...keys, '調整後金額'];
 
     // 4.save file data
     await addsheetToGoogleSheet(keys, cleansing_result);
 
     // 5.response
+    response.setHeader('Content-Type', 'application/json');
     response.json({message: "success"}); 
 });
 

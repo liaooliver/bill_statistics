@@ -1,15 +1,44 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import Circle from '../components/Circle';
+import { BillListContext } from '../context/BillListContext';
 import { InteractiveContext } from '../context/InteractiveContext';
 
 const EditTable = () => {
 
-    const { register, handleSubmit, watch, errors } = useForm();
-    const { setOpenEditMode } = useContext(InteractiveContext);
-    const onSubmit = data => {
-        setOpenEditMode(false)
+    const [ activeLoad, setActiveLoad ] = useState(false)
+    const { register, handleSubmit, reset } = useForm();
+    const { billDetail, setOpenEditMode } = useContext(InteractiveContext);
+    const { updateBill, getBillList, billList } = useContext(BillListContext);
+
+    const onSubmit = async (data) => {
+
+        setActiveLoad(true)
+        const updated = {
+            ...billDetail,
+            '類別': data["category"],
+            '調整後金額': data["price"],
+            '消費明細': data["detail"],
+            '備忘錄': data["remark"]
+        }
+
+        const { page, limit} = billList
+        updateBill(updated).then(res => {
+            return getBillList(page, limit)
+        }).then(res => {
+            setActiveLoad(false)
+            setOpenEditMode(false)
+        })
     }
 
+    useEffect(() => {
+        reset({
+            category: billDetail['類別'],
+            price: billDetail['調整後金額'],
+            detail: billDetail['消費明細'],
+            remark: billDetail['備忘錄']
+        })        
+    }, [billDetail, reset])
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow w-full mx-auto my-16 rounded-lg sm:w-3/4 md:w-4/5 xl:w-2/5 relative z-20">
@@ -30,7 +59,7 @@ const EditTable = () => {
                                         </svg>
                                     </span>
                                 </div>
-                                <p className="pl-7">2020/10/10</p>
+                                <p className="pl-8">{ billDetail['消費日期'] }</p>
                             </div>
                         </dd>
                     </div>
@@ -45,7 +74,7 @@ const EditTable = () => {
                                         </svg>
                                     </span>
                                 </div>
-                                <p className="pl-7">2020/10/10</p>
+                                <p className="pl-8">{ billDetail['入帳日期'] }</p>
                             </div>
                         </dd>
                     </div>
@@ -60,7 +89,7 @@ const EditTable = () => {
                                         </svg>
                                     </span>
                                 </div>
-                                <p className="pl-7">2020/10/10</p>
+                                <p className="pl-8">{ billDetail['卡別'] }</p>
                             </div>
                         </dd>
                     </div>
@@ -71,7 +100,7 @@ const EditTable = () => {
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <span className="text-gray-500 sm:text-sm">$</span>
                                 </div>
-                                <p className="pl-7">1000</p>
+                                <p className="pl-7">{ billDetail['金額'] }</p>
                             </div>
                         </dd>
                     </div>
@@ -87,18 +116,23 @@ const EditTable = () => {
                                     </span>
                                 </div>
                                 <select id="category" name="category" ref={register} className="border outline-none bg-white focus:ring-1 focus:ring-indigo-400 focus:border-indigo-500 block w-full pl-8 pr-3 py-2 sm:text-sm border-gray-300 rounded">
-                                    <option>食</option>
-                                    <option>衣</option>
-                                    <option>行</option>
-                                    <option>育</option>
-                                    <option>樂</option>
+                                    <option value="吃飯">吃飯</option>
+                                    <option value="交通">交通</option>
+                                    <option value="捐款">捐款</option>
+                                    <option value="3C">3C</option>
+                                    <option value="衣服">衣服</option>
+                                    <option value="娛樂">娛樂</option>
+                                    <option value="旅遊">旅遊</option>
+                                    <option value="電話">電話</option>
+                                    <option value="進修">進修</option>
+                                    <option value="其他">其他</option>
                                 </select>
                             </div>
                         </dd>
                     </div>
                     
                     <div className="bg-white px-4 py-1 col-span-2">
-                        <dt className="text-sm font-medium text-gray-500">消費金額調整</dt>
+                        <dt className="text-sm font-medium text-gray-500">消費調整後金額</dt>
                         <dd className="text-sm text-gray-900">
                             <div className="mt-2 relative rounded shadow-sm">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -126,8 +160,14 @@ const EditTable = () => {
                     </div>
 
                     <div className="bg-white px-4 py-1 flex justify-end col-span-4">
-                        <button type="submit" className="py-1 px-3 rounded bg-blue-200 text-blue-700 hover:text-blue-100 hover:bg-blue-600">儲存</button>
-                        <button onClick={()=>setOpenEditMode(false)} className="py-1 px-3 rounded bg-red-200 text-red-700 hover:text-red-100 hover:bg-red-600 ml-4">取消</button>
+                        <button
+                            type="submit"
+                            className="group px-4 py-2 btn-outline-none btn-rounded btn-color-blue btn-inner-circle">
+                            {
+                                activeLoad ? <><Circle />儲存中</> : '儲存'
+                            }
+                        </button>
+                        <button onClick={()=>setOpenEditMode(false)} className="px-4 py-2 ml-4 btn-outline-none btn-rounded btn-color-red">取消</button>
                     </div>
                 </dl>
             </div>

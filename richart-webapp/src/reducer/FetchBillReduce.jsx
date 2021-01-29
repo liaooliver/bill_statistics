@@ -5,7 +5,7 @@ export default (state, { type, payload }) => {
             return {
                 isloading: false,
                 isError: false,
-                message: "",
+                message: null,
                 payload: payload['result'],
                 page: payload['page'],
                 limit: payload['limit'],

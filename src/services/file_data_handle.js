@@ -1,5 +1,6 @@
 const XLSX = require('xlsx');
 const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 const { accessSpreadsheet } = require('../models/spreadsheet');
 
 const readFile = async function () {
@@ -23,6 +24,7 @@ const cleansingFile = function (file) {
         } else {
             item['金額'] = item['金額'].replace('NT$', '');
         }
+        item["ID"] = uuidv4();
         return item;
     });
 };

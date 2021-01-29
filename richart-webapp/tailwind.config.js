@@ -6,7 +6,10 @@ module.exports = {
   },
   variants: {
     extend: {
+      outline: ['hover', 'active'],
+      ringWidth: ['hover', 'active'],
       ringColor: ['hover', 'focus'],
+      borderColor: ['active'],
     },
   },
   plugins: [],

@@ -9,7 +9,7 @@ const List = () => {
 
     useEffect(()=> {
         getBillList(0, 10);
-    }, [])
+    }, [getBillList])
 
     return (
         <Table billList={billList} />

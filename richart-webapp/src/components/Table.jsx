@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Pagination from '../components/Pagination';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 
 const Table = ({ billList }) => {
+
+    useEffect(() => {
+      console.log(billList)  
+    }, [billList])
+
+
     return (
         <div className="flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

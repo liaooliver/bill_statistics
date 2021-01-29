@@ -4,14 +4,11 @@ const { accessSpreadsheet } = require('../models/spreadsheet');
 
 // 編輯單一 row 的資料
 router.post('', async function (request, response) {
-    const indexOfRow = 4;
     const rowData = request.body;
-
-    // connect doc
     await accessSpreadsheet().then(async doc => {
         const sheet = doc.sheetsByTitle['newbill'];
         const rows = await sheet.getRows();
-        
+        const indexOfRow = rows.map(x => x.ID).indexOf(rowData.ID);
         Object.keys(rowData).forEach(async key => {
             rows[indexOfRow][key] = rowData[key];
         });
