@@ -9,7 +9,7 @@ module.exports = {
       outline: ['hover', 'active'],
       ringWidth: ['hover', 'active'],
       ringColor: ['hover', 'focus'],
-      borderColor: ['active'],
+      borderColor: ['active']
     },
   },
   plugins: [],

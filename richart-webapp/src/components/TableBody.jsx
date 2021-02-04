@@ -2,33 +2,34 @@ import React, { useContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { InteractiveContext } from '../context/InteractiveContext';
 import { displayNTD } from '../utils/currency';
+import { colorObj } from '../utils/bill_category';
 
 const LoadingRow = () => {
     return (
         <tr>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div className="w-full h-5 bg-gray-400 rounded"></div>
+                <div className="w-full h-7 bg-gray-400 rounded"></div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div className="w-full h-5 bg-gray-400 rounded"></div>
+                <div className="w-full h-7 bg-gray-400 rounded"></div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div className="w-full h-5 bg-gray-400 rounded"></div>
+                <div className="w-full h-7 bg-gray-400 rounded"></div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div className="w-full h-5 bg-gray-400 rounded"></div>
+                <div className="w-full h-7 bg-gray-400 rounded"></div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div className="w-full h-5 bg-gray-400 rounded"></div>
+                <div className="w-full h-7 bg-gray-400 rounded"></div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div className="w-full h-5 bg-gray-400 rounded"></div>
+                <div className="w-full h-7 bg-gray-400 rounded"></div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <div className="w-full h-5 bg-gray-400 rounded"></div>
+                <div className="w-full h-7 bg-gray-400 rounded"></div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <div className="py-1 px-1 h-5 rounded bg-indigo-200 text-indigo-700 hover:text-indigo-100 hover:bg-indigo-600"></div>
+                <div className="py-1 px-1 h-7 rounded bg-indigo-200 text-indigo-700 hover:text-indigo-100 hover:bg-indigo-600"></div>
             </td>
         </tr>
     )
@@ -36,19 +37,6 @@ const LoadingRow = () => {
 
 const RenderRow = ({ data, activeEdit }) => {
     
-    const colorObj = {
-        "吃飯":"badge-green",
-        "交通":"badge-blue",
-        "捐款":"badge-pink",
-        "3C":"badge-yellow",
-        "衣服":"badge-yellow",
-        "娛樂":"badge-yellow",
-        "旅遊":"badge-yellow",
-        "電話":"badge-purple",
-        "進修":"badge-blue",
-        "其他":"badge-red"        
-    }
-
     return (  
         <tr>
             <td className="px-6 py-4 whitespace-nowrap">

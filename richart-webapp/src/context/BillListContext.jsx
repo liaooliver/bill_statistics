@@ -26,10 +26,7 @@ export const BillListContextProvider = ({ children }) => {
         data.append('file', file)
         return await fetch(`http://localhost:3001/uploadFile`, {
             method: 'POST',
-            body: data,
-            // headers: {
-            //     'Content-Type': 'multipart/form-data'
-            // }
+            body: data
         }).then(response => response.json())
     }
 

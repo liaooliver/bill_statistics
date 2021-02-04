@@ -2,17 +2,21 @@ import React, { useContext, useEffect } from 'react';
 import Table from '../components/Table';
 import { BillListContext } from '../context/BillListContext';
 
-const List = () => {
+const List = (props) => {
 
     // from global state
     const { billList, getBillList } = useContext(BillListContext);
 
-    useEffect(()=> {
+    useEffect(() => {
         getBillList(0, 10);
-    }, [getBillList])
+    }, [])
 
     return (
-        <Table billList={billList} />
+        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            <div className="px-4 sm:px-0">
+                <Table billList={billList} />
+            </div>
+        </div>
     );
 }
 
