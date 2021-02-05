@@ -2,10 +2,10 @@ const { accessSpreadsheet } = require('../models/spreadsheet');
 
 const getSheet = async function () {
 
-    // connect google sheet
+    // connect google sheet => doc - whole spread sheet
     const doc = await accessSpreadsheet().then(async doc => doc);
 
-    // get sheet
+    // get sheet => sheets - single sheet
     const sheets = doc.sheetsByTitle['newbill'];
 
     // get header name [string]

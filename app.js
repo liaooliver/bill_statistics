@@ -10,7 +10,7 @@ const path = require('path');
 const uploadFile = require('./src/apis/uploadFile.controller');
 const updateSheet = require('./src/apis/updateSheet.controller');
 const readSheet = require('./src/apis/readSheet');
-
+const subsidiaryLedger = require('./src/apis/subsidiaryLedger');
 
 global.appRoot=path.resolve(__dirname);
 
@@ -22,12 +22,10 @@ app.get("/", (request, response) => {
     response.send("Is Working");
 });
 
-
 app.use('/uploadFile', uploadFile);
 app.use('/readSheet', readSheet);
 app.use('/updateSheet', updateSheet);
-
-
+app.use('/subsidiaryLedger', subsidiaryLedger);
 
 app.listen(port, () => {
     console.log("Express is Working");

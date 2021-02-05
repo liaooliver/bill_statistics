@@ -1,7 +1,7 @@
 const multer = require("multer");
 
 const fileFilter = (req, file, cb) => {
-  console.log(file)
+
   if (file.mimetype.includes("sheet")) {
     cb(null, true);
   } else {
