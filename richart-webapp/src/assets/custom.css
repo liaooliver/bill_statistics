@@ -1,0 +1,17 @@
+.-deco-text-box{
+    display: inline-block;
+    width: 115%;
+    height: 20px;
+    border: 1px solid;
+    border-color: #ccc;
+    top: 10px;
+    left: -8px;
+    position: absolute;
+    z-index: -1;
+
+}
+@media (min-width: 640px) {
+    .-deco-text-box{
+        top: 14px;
+    }
+}
