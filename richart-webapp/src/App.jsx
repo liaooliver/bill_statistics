@@ -17,37 +17,36 @@ import { InteractiveContextProvider } from './context/InteractiveContext';
 function App() {
 
   return (
-    <Router>
-      <InteractiveContextProvider>
-        <BillListContextProvider>
-          <div className="relative bg-white">
-
-            <EditWindow />
-
-            <Navigation />
-
-            <main>
-              {/* 使用 Suspense 在 lazy loading 完成前渲染 並等待 lazy loading 完成 */}
-              <Suspense fallback={<div></div>}>
-                <Switch>
-                  {/* 透過 react config 渲染 component */}
-                  {
-                    routes.map(route => (
-                      <Route
-                        path={route.path}
-                        key={uuidv4()}
-                        render={(props) => <route.component {...props} />}
-                      />
-                    ))
-                  }
-                </Switch>
-              </Suspense>
-            </main>
-          </div>
-          <Footer />
-        </BillListContextProvider>
-      </InteractiveContextProvider>
-    </Router>
+    <div className="relative bg-white">
+      <Router>
+        <InteractiveContextProvider>
+          <BillListContextProvider>
+            
+              <EditWindow />
+              <Navigation />
+              <main>
+                {/* 使用 Suspense 在 lazy loading 完成前渲染 並等待 lazy loading 完成 */}
+                <Suspense fallback={<div></div>}>
+                  <Switch>
+                    {/* 透過 react config 渲染 component */}
+                    {
+                      routes.map(route => (
+                        <Route
+                          path={route.path}
+                          key={uuidv4()}
+                          render={(props) => <route.component {...props} />}
+                        />
+                      ))
+                    }
+                  </Switch>
+                </Suspense>
+              </main>
+            
+            <Footer />
+          </BillListContextProvider>
+        </InteractiveContextProvider>
+      </Router>
+    </div>
   );
 };
 

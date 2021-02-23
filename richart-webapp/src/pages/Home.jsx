@@ -6,7 +6,7 @@ import IntroTech from '../components/IntroTech';
 
 const Home = () => {
     return ( 
-        <div>
+        <div data-testid="homeBlock">
             <Banner />
             <Motivation />
             <Introduction />
