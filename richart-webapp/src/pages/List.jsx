@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import Table from '../components/Table';
 import { BillListContext } from '../context/BillListContext';
 
@@ -13,9 +14,14 @@ const List = (props) => {
 
     return (
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            <div className="px-4 sm:px-0">
-                <Table billList={billList} />
-            </div>
+            {
+                billList.isError ? <Redirect to="/500" /> : <>
+                    <p>{billList.isError ?　"true": "false"}</p>
+                    <div className="px-4 sm:px-0">
+                        <Table billList={billList} />
+                    </div>
+                </>
+            }
         </div>
     );
 }

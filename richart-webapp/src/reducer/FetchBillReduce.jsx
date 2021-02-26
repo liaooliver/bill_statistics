@@ -15,7 +15,7 @@ export default (state, { type, payload }) => {
         case 'FAIL_FETCH':
             return {
                 isloading: false,
-                isError: false,
+                isError: true,
                 message: payload,
                 payload: []
             };
