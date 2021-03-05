@@ -12,9 +12,8 @@ const IntrpCard = ({ img, alt, title, content, extraContent }) => {
                     <dd className="mt-2 text-base text-gray-500 md:w-4/5 m-auto text-center">
                         {content}
                         {
-                            extraContent && <p className="font-medium text-sm text-red-400 ">{extraContent}</p> 
+                            extraContent && <p className="font-medium text-xs text-red-400 ">{extraContent}</p> 
                         }
-                        
                     </dd>
 
                 </div>

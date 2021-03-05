@@ -18,20 +18,20 @@ export const BillListContextProvider = ({ children }) => {
         page: null,
         limit: null,
         total: null,
-        totalPage: null
+        totalPage: 0
     })
 
     const postBillFile = async (file) => {
         const data = new FormData() 
         data.append('file', file)
-        return await fetch(`http://localhost:3001/uploadFile`, {
+        return await fetch(`uploadFile`, {
             method: 'POST',
             body: data
         }).then(response => response.json())
     }
 
     const getBillList = async (page = 0, limit = 10) => {
-        await fetch(`http://localhost:3001/readSheet?page=${page}&limit=${limit}`)
+        await fetch(`readSheet?page=${page}&limit=${limit}`)
             .then(response => response.json())
             .then(response => {
                 const payload = response;
@@ -48,7 +48,7 @@ export const BillListContextProvider = ({ children }) => {
     };
 
     const updateBill = async (data) => {
-        return await fetch('http://localhost:3001/updateSheet', {
+        return await fetch('updateSheet', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: { 'content-type': 'application/json' }

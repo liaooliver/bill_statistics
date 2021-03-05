@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3001;
+const port = 3002;
 
 require('dotenv').config();
 
@@ -17,6 +17,8 @@ global.appRoot=path.resolve(__dirname);
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(express.static(`${__dirname}/richart-webapp/build`));
 
 app.get("/", (request, response) => {
     response.send("Is Working");

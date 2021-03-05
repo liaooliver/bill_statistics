@@ -12,3 +12,8 @@ https://github.com/testing-library/jest-dom#tocontainelement
 
 testing-library core api
 https://testing-library.com/docs/queries/about
+
+* docker cicd
+https://medium.com/@wilpat456/my-first-go-at-travis-ci-d0e63ccdc4d0
+
+https://alligator.io/workflow/deploying-docker-app/
