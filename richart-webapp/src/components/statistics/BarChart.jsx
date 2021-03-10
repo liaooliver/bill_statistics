@@ -1,12 +1,12 @@
 import React from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { color_month } from '../../utils/bill_category.js';
+import { v4 as uuidv4 } from 'uuid';
 
-
-const BarChartComponent = ({ dataSet }) => {
+const BarChartComponent = ({ dataSet, title, dataKey, name, barSize, colorType }) => {
     return ( 
         <>
-            <h4 className="text-center mb-3">月份消費總額</h4>
+            <h4 className="text-center mb-3">{ title }</h4>
             <div style={{ width: '100%', height: 400 }}>
                 <ResponsiveContainer>
                     <BarChart data={dataSet} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
@@ -14,16 +14,22 @@ const BarChartComponent = ({ dataSet }) => {
                         <XAxis dataKey="category" />
                         <YAxis />
                         <Tooltip />
-                        <Bar name="$" dataKey="spend" fill="#1e90ff">
-                            {
-                                dataSet.map((entry, index) => {
-                                    return (<Cell
-                                        key={`cell-${index}`}
-                                        fill={color_month[index]}
-                                    />)}
+                        {
+                            dataKey.map((key, bar_index) => {
+                                return (
+                                    < Bar name={name[bar_index]} dataKey = { key } fill = "#1e90ff" barSize = { barSize } key={uuidv4()}>
+                                    {
+                                        dataSet.map((entry, index) => {
+                                            return (<Cell
+                                                key={`cell-${index}`}
+                                                fill={ colorType === 'bar' ? color_month['bar'][index] : color_month['bar_scatter'][bar_index]}
+                                            />)}
+                                        )
+                                    }
+                                </Bar>
                                 )
-                            }
-                        </Bar>
+                            })
+                        }
                     </BarChart>
                 </ResponsiveContainer>
             </div>

@@ -18,35 +18,36 @@ import { COLORS } from '../../utils/bill_category.js';
 //   );
 // };
 
-const PieChartComponent = ({ dataSet }) => {
+const PieChartComponent = ({ dataSet, title }) => {
     return (
-        <div style={{ width: 400, height: 300 }}>
-            <ResponsiveContainer>
-                <PieChart>
-                    <Pie
-                        nameKey="category"
-                        dataKey="by_percentage"
-                        isAnimationActive={false}
-                        data={dataSet}
-                        cx={180}
-                        cy={150}
-                        outerRadius={120}
-                        fill="#8884d8"
-                        label
-                    >
-                        {
-                            dataSet.map((entry, index) =>
-                                <Cell
-                                    key={`cell-${index}`}
-                                    fill={COLORS[entry.category]}
-                                />
-                            )
-                        }
-                    </Pie>
-                    <Tooltip />
-                </PieChart>
-            </ResponsiveContainer>
-        </div>
+        <>
+            <h4 className="text-center mb-3">{ title }</h4>
+            <div style={{ width: '100%', height: 400 }}>
+                <ResponsiveContainer>
+                    <PieChart>
+                        <Pie nameKey="category"
+                            dataKey="by_percentage"
+                            isAnimationActive={false}
+                            data={dataSet}
+                            cx="50%" cy="50%"
+                            outerRadius={120}
+                            fill="#8884d8"
+                            label
+                        >
+                            {
+                                dataSet.map((entry, index) =>
+                                    <Cell
+                                        key={`cell-${index}`}
+                                        fill={COLORS[entry.category]}
+                                    />
+                                )
+                            }
+                        </Pie>
+                        <Tooltip />
+                    </PieChart>
+                </ResponsiveContainer>
+            </div>
+        </>
     );
 }
 

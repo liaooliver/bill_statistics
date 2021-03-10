@@ -14,10 +14,16 @@ export const StatisticsContextProvider = ({ children }) => {
             .then(response => response.json())
     }
 
+    const scatteredBymonthly = async (year, month) => {
+        return await fetch(`subsidiaryLedger/scattered_monthly?year=${year}&month=${month}`)
+            .then(response => response.json())
+    }
+
     return (
         <StatisticsContext.Provider value={{
             getFilterByCategory,
-            getFilterByMonthly
+            getFilterByMonthly,
+            scatteredBymonthly
         }}>{children}</StatisticsContext.Provider>
     )
 }

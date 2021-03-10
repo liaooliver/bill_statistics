@@ -24,18 +24,24 @@ export const COLORS = {
     "其他":"#10B981"
 }
 
-export const color_month = [
-    '#ff0000',
-    '#ff007f',
-    '#ff00ff',
-    '#7f00ff',
-    '#0000ff',
-    '#007fff',
-    '#00ffff',
-    '#00ff7f',
-    '#00ff00',
-    '#7fff00',
-    '#ffff00',
-    '#ff7f00'
-]
+export const color_month = {
+    bar_scatter: [
+        '#3b82f6',
+        '#f59e0b'
+    ],
+    bar: [
+        '#ff0000',
+        '#ff007f',
+        '#ff00ff',
+        '#7f00ff',
+        '#0000ff',
+        '#007fff',
+        '#00ffff',
+        '#00ff7f',
+        '#00ff00',
+        '#7fff00',
+        '#ffff00',
+        '#ff7f00'
+    ]
+}
 
