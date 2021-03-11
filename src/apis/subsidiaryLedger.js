@@ -5,8 +5,8 @@ const { category, monthly } = require('../services/ledger_handle');
 const { scattered } = require('../services/scattered_handle');
 
 router.get('/filter_by_category', async function (request, response) {
-    const data = await getSheet();
-    const result = category(data);
+    // const data = await getSheet();
+    const result = category("data");
     response.json(result);
 });
 
@@ -17,8 +17,8 @@ router.get('/filter_by_monthly', async function (request, response) {
 });
 
 router.get('/scattered_monthly', async function (request, response) {
-    const data = await getSheet();
-    const result = scattered(data);
+    // const data = await getSheet();
+    const result = scattered("");
     response.json(result);
 });
 

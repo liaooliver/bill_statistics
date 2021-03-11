@@ -1,9 +1,9 @@
 const {
     plusZero
 } = require('../utils/plusZero');
-
+const { data } = require('../services/fakeData');
 const scattered = (dataSet) => {
-    console.log(dataSet);
+    
     const tempObj = {};
 
     for (let i = 0; i < 31; i++){
@@ -13,9 +13,10 @@ const scattered = (dataSet) => {
         };
     }
 
-    dataSet.forEach(item => {
+    data.forEach(item => {
         const billSpend = Number(item['金額'].replace(",", ""));
-        const adjustSpend = Number(item['調整後金額'] ? item['調整後金額'].replace(",", "") : 0);
+        const adjustSpend = Number(item['調整後金額'] ? item['調整後金額'].replace(",", "") : Number(item['金額'].replace(",", "")));
+        console.log("adjustSpend" , adjustSpend)
         tempObj[item['消費日期'].substring(8, 10)]['billSpend'] = tempObj[item['消費日期'].substring(8, 10)]['billSpend'] + billSpend;
         tempObj[item['消費日期'].substring(8, 10)]['adjustSpend'] = tempObj[item['消費日期'].substring(8, 10)]['adjustSpend'] + adjustSpend;
     });

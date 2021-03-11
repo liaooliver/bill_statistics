@@ -40,7 +40,7 @@ const RenderRow = ({ data, activeEdit }) => {
     return (  
         <tr>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div>{data['入帳日期']}</div>
+                <div>{data['消費日期']}</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
                 <div>{data['卡別']}</div>
