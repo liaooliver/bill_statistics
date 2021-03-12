@@ -30,12 +30,6 @@ const TechGroup = () => {
                     alt: 'tailwindcss',
                     size: '80%',
                     title: 'tailwindcss'
-                },
-                {
-                    icon: jestIcon,
-                    alt: 'jestIcon',
-                    size: '65%',
-                    title: 'Jest'
                 }
             ]
         },
@@ -53,12 +47,6 @@ const TechGroup = () => {
                     alt: 'googleIcon',
                     size: '80%',
                     title: 'google sheet'
-                },
-                {
-                    icon: jestIcon,
-                    alt: 'jestIcon',
-                    size: '65%',
-                    title: 'Jest'
                 }
             ]
         },
