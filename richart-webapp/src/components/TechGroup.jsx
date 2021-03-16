@@ -4,7 +4,6 @@ import CircleDisplay from './CircleDisplay';
 
 import reactIcon from '../assets/icons/react.svg';
 import tailwindcssIcon from '../assets/icons/tailwindcss.svg';
-import jestIcon from '../assets/icons/jest.svg';
 import nodeIcon from '../assets/icons/node.svg';
 import dockerIcon from '../assets/icons/file-type-docker.svg';
 import githubIcon from '../assets/icons/github-icon.svg';
@@ -69,7 +68,7 @@ const TechGroup = () => {
                     icon: dockerIcon,
                     alt: 'dockerIcon',
                     size: '100%',
-                    title: 'Docker & Docker hub'
+                    title: 'Docker'
                 },
                 {
                     icon: awsIcon,
@@ -92,7 +91,7 @@ const TechGroup = () => {
                                 <span className="-deco-text-box"></span>
                             </h3>
                         </div>
-                        <div className="grid grid-cols-3 gap-3 mb-2">
+                        <div className="grid grid-cols-2 gap-6 mb-2">
                             {
                                 item.techItem.map(tech => <CircleDisplay key={uuidv4()} icon={tech.icon} alt={tech.alt} size={tech.size} title={tech.title} position={'items-center'} />)
                             }

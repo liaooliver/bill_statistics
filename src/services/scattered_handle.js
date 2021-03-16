@@ -13,10 +13,10 @@ const scattered = (dataSet) => {
         };
     }
 
-    data.forEach(item => {
+    dataSet.forEach(item => {
         const billSpend = Number(item['金額'].replace(",", ""));
         const adjustSpend = Number(item['調整後金額'] ? item['調整後金額'].replace(",", "") : Number(item['金額'].replace(",", "")));
-        console.log("adjustSpend" , adjustSpend)
+        
         tempObj[item['消費日期'].substring(8, 10)]['billSpend'] = tempObj[item['消費日期'].substring(8, 10)]['billSpend'] + billSpend;
         tempObj[item['消費日期'].substring(8, 10)]['adjustSpend'] = tempObj[item['消費日期'].substring(8, 10)]['adjustSpend'] + adjustSpend;
     });

@@ -1,7 +1,7 @@
 import React from 'react';
 import ScaleLoader from "react-spinners/ScaleLoader";
 
-const Loading = () => {
+const ScaleLoading = () => {
     return (
         <div className="flex justify-center my-24">
             <ScaleLoader color="rgba(59, 130, 246, 1)" />
@@ -9,4 +9,4 @@ const Loading = () => {
     );
 }
 
-export default Loading;
+export default ScaleLoading;

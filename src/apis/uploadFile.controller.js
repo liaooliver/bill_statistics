@@ -5,23 +5,22 @@ const { readFile, cleansingFile, addsheetToGoogleSheet } = require('../services/
 
 // 上傳 excel 並存到 google sheet
 router.post('', uploadFile.single("file"), async (request, response) => {
-
-    // 1.read file
-    const result = await readFile();
+    // 1.read excel file
+    // const result = await readFile();
     
     // 2.clean file data
-    const cleansing_result = await cleansingFile(result);
+    // const cleansing_result = await cleansingFile(result);
 
     // 3.get header row
-    let keys = Object.keys(cleansing_result[0]);
-    keys = [...keys, '調整後金額'];
+    // let keys = Object.keys(cleansing_result[0]);
+    // keys = [...keys, '調整後金額'];
 
     // 4.save file data
-    await addsheetToGoogleSheet(keys, cleansing_result);
+    // await addsheetToGoogleSheet(keys, cleansing_result);
 
     // 5.response
     response.setHeader('Content-Type', 'application/json');
-    response.json({message: "success"}); 
+    response.status(500).json({message: "Fail"}); 
 });
 
 module.exports = router;

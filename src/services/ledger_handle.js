@@ -16,22 +16,20 @@ const maximum = () => { };
 * @return {object} - return monthly data
 */
 
-  
 const monthly = (dataSet) => { 
     const monthly = {};
     dataSet.forEach(item => {
+
         const base_date = item['消費日期'].slice(0, 7);
+        
         let spend = Number(item['金額'].replace(",", ""));
-        let realSpend = item['調整後金額'] ? Number(item['調整後金額'].replace(",", "")) : item['調整後金額'];
+        let realSpend = Number(item['調整後金額'] ? item['調整後金額'].replace(",", "") : Number(item['金額'].replace(",", "")));
         
         if (monthly[base_date]) {
             monthly[base_date]['spend'] = monthly[base_date]['spend'] + spend;
-            monthly[base_date]['realSpend'] = realSpend ? monthly[base_date]['realSpend'] + realSpend : monthly[base_date]['realSpend'] + spend;
+            monthly[base_date]['realSpend'] = monthly[base_date]['realSpend'] + realSpend;
         } else {
-            monthly[base_date] = {
-                spend: spend,
-                realSpend: realSpend ? realSpend : spend
-            };
+            monthly[base_date] = { spend, realSpend };
         }
     });
     
@@ -66,10 +64,12 @@ const category = (dataSet) => {
     const last = dataSet[0]['消費日期'];
     const begin = dataSet[dataSet.length-1]['消費日期'];
     
-    data.forEach(item => {
-        let spend = item['調整後金額'] ? item['調整後金額'] : item['金額'];
-        accumulatedCost = accumulatedCost + item['金額'];
-        spend = parseInt(spend.replace(",", ""));
+    dataSet.forEach(item => {
+        let spend = item['金額'];
+        let realSpend = Number(item['調整後金額'] ? item['調整後金額'].replace(",", "") : Number(item['金額'].replace(",", "")));
+        spend = Number(spend.replace(",", ""));
+        accumulatedCost = accumulatedCost + spend;
+        accumulatedRealCost = accumulatedRealCost + realSpend;
         total_send = total_send + spend;
         if (result[item['類別']]) {
             result[item['類別']] = result[item['類別']] + spend;
@@ -88,7 +88,13 @@ const category = (dataSet) => {
         };
     });
 
-    return { begin, last, value, accumulatedCost };
+    return {
+        begin,
+        last,
+        value,
+        accumulatedCost: accumulatedCost*-1,
+        accumulatedRealCost: accumulatedRealCost*-1
+    };
 };
 
 const summary = () => { };

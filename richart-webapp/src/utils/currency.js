@@ -6,7 +6,7 @@ export const displayNTD = (value) => {
 
     // check type
     if (typeof value === 'string') {
-        number = Number.parseInt(number.replace(/[,]+/g, ""));
+        number = Number(number.replace(/[,]+/g, ""))*-1;
     }
 
     // define NumberFormat option

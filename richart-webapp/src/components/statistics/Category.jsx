@@ -9,13 +9,6 @@ const Category = ({ categories }) => {
         <div className="p-3 border rounded shadow md:sticky md:top-4">
             <div className="flex mb-3">
                 <h5 className="flex-grow">帳單分類</h5>
-                {
-                    categories && (
-                        <span className="font-bold text-sm text-right">
-                            {categories && categories.begin} ~ { categories && categories.last}
-                        </span>
-                    )
-                }
             </div>
             <ul className="flex flex-wrap">
                 {

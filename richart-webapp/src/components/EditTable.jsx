@@ -17,7 +17,7 @@ const EditTable = () => {
         const updated = {
             ...billDetail,
             '類別': data["category"],
-            '調整後金額': data["price"],
+            '調整後金額': data["price"] ? Number(data["price"])*-1 : data["price"],
             '消費明細': data["detail"],
             '備忘錄': data["remark"]
         }
@@ -28,6 +28,7 @@ const EditTable = () => {
         }).then(res => {
             setActiveLoad(false)
             setOpenEditMode(false)
+            sessionStorage.removeItem('StatisticsData')
         })
     }
 

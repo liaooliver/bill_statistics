@@ -19,6 +19,10 @@ const readFile = async function () {
  */
 const cleansingFile = function (file) {
     return file.map(item => {
+
+        if (item['消費明細'].includes('高鐵')) item['類別'] = '交通';
+        if (item['消費明細'].includes('基金會')) item['類別'] = '捐款';
+
         if (item['金額'].includes('-NT$')) {
             item['金額'] = item['金額'].replace('-NT$', '-');
         } else {
@@ -30,11 +34,22 @@ const cleansingFile = function (file) {
 };
 
 const addsheetToGoogleSheet = async function (keys, cleansingFile_result) {
-    await accessSpreadsheet().then(async doc => {
-        const newSheet = await doc.addSheet({ title: 'newbill' }); // adds a new sheet
-        await newSheet.setHeaderRow(keys);
-        await newSheet.addRows(cleansingFile_result);
-    });
+
+    const doc = await accessSpreadsheet().then(async doc => doc);
+    const sheets = doc.sheetsByTitle['newbill'];
+    
+    if (sheets) {
+        await sheets.delete();
+        addGoogleSheet(doc, keys, cleansingFile_result);
+    } else {
+        addGoogleSheet(doc, keys, cleansingFile_result);
+    }
+};
+
+const addGoogleSheet = async function (doc, keys, cleansingFile_result) {
+    const newSheet = await doc.addSheet({ title: 'newbill' }); // adds a new sheet
+    await newSheet.setHeaderRow(keys);
+    await newSheet.addRows(cleansingFile_result);
 };
 
 module.exports = {
