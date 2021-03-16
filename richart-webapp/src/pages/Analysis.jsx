@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from "react-router"
 import RenderAnalysis from '../components/statistics/RenderAnalysis';
-import LoadingComponent from '../components/Loading';
+import ScaleLoading from '../components/loadingStyle/ScaleLoading';
 import { StatisticsContextProvider, StatisticsContext } from '../context/StatisticsContext';
 
 // Context Provider
@@ -26,10 +26,6 @@ const FetchStatisticsData = () => {
             setScattered(cache[2])
             setLoading(true)
         } else {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = now.getMonth() + 1;
-            console.log(year, month)
             Promise.all([category(), monthly(), scatter()]).then(res => {
                 setCategory(res[0])
                 setMonthly(res[1])
@@ -46,7 +42,7 @@ const FetchStatisticsData = () => {
                 loading ? <RenderAnalysis
                     scattered={scattered}
                     monthly={monthly}
-                    category={category} /> : <LoadingComponent />
+                    category={category} /> : <ScaleLoading />
             }
         </>
     )
