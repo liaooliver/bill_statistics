@@ -1,11 +1,40 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 const Navigation = () => {
 
     const [isOpen, setOpen] = useState(false)
+    const [links, setLinks] = useState([
+        {
+            url: '/',
+            text: '首頁',
+            isActive: false
+        },{
+            url: '/list',
+            text: '帳單明細',
+            isActive: false
+        },{
+            url: '/analysis',
+            text: '帳單分析',
+            isActive: false
+        },{
+            url: '/import',
+            text: '匯入功能',
+            isActive: false
+        },{
+            url: '/setting',
+            text: '設定功能',
+            isActive: false
+        }
+    ])
 
-
+    const activeChange = (index) => {
+        const oldStatus = [...links];
+        oldStatus.forEach(item => item.isActive = false);
+        oldStatus[index]['isActive'] = true;
+        setLinks(oldStatus)
+    }
 
     return (
         <nav className="bg-gray-800 shadow-lg">
@@ -17,13 +46,13 @@ const Navigation = () => {
                         </div>
                         <div className="hidden md:block">
                             <div className="ml-10 flex items-baseline space-x-4">
-                                {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
-                                <Link to="/" className="bg-gray-900 btn-link-base">首頁</Link>
-                                <Link to="/list" className="btn-link-base">帳單明細</Link>
-                                <Link to="/analysis" className="btn-link-base">帳單分析</Link>
-                                <Link to="/import" className="btn-link-base">匯入功能</Link>
-                                <Link to="/404" className="btn-link-base">404</Link>
-                                <Link to="/500" className="btn-link-base">500</Link>
+                                {
+                                    links.map((item, index) => <Link key={uuidv4()} to={item.url} onClick={()=>{activeChange(index)}}
+                                        className={`${item.isActive ? 'bg-gray-900' : ''} btn-link-base`}>
+                                        {item.text}
+                                    </Link>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
@@ -48,6 +77,13 @@ const Navigation = () => {
             <div className={`${isOpen ? 'block' : 'hidden'} md:hidden`}>
                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
+                    {
+                        links.map((item, index) => <Link key={uuidv4()} to={item.url} onClick={()=>{activeChange(index)}}
+                                className={`${item.isActive ? 'bg-gray-900' : ''} btn-link-base`}>
+                                {item.text}
+                            </Link>
+                        )
+                    }
                     <div className={`btn-link-base`}>
                         <Link to="/">首頁</Link>
                     </div>

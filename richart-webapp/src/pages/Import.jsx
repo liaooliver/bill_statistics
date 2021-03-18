@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { BillListContext } from '../context/BillListContext';
 import BounceLoader from "react-spinners/BounceLoader";
 
-
 const Import = () => {
 
     const { postBillFile } = useContext(BillListContext)
@@ -29,34 +28,35 @@ const Import = () => {
     };
     // 2. listen input change event & Drop event 
     const handleDrop = async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        // remove boder dash color
-        setIsFileIn(false)
-        
-        const data = new FormData() 
-        data.append('file', e.nativeEvent.dataTransfer.files)
-        postBillFile(e.nativeEvent.dataTransfer.file)
-            .then(response => {
-                setSuccess(true)
-            })
-            .catch(error => {
-                setFail(true)
-            })
-            
+        triggerAPI(e, e.nativeEvent.dataTransfer.files[0])
     };
     const change = (e) => {
+        triggerAPI(e, e.nativeEvent.target.files[0])
+    }
+    // reuse post logic
+    const triggerAPI = async (e, files) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log(e.nativeEvent.target.files)
-        const data = new FormData() 
-        data.append('file', e.nativeEvent.target.files)
+           
+        resetState()
+
+        postBillFile(files).then(response => {
+            const { message } = response;
+            setUploading(false)
+            if (message === 'success') {
+                setSuccess(true)
+                sessionStorage.removeItem('StatisticsData')
+            } else {
+                setFail(true)
+            }
+        })
         
-        // postBillFile(e.nativeEvent.target.files[0])
-        //     .then(response => {
-        //         console.log(response)
-        //         setSuccess(true)
-        //     })
+    }
+    const resetState = () => {
+        setIsFileIn(false)
+        setUploading(true)
+        setSuccess(false)
+        setFail(false)
     }
 
     return (
@@ -79,7 +79,7 @@ const Import = () => {
                                 </div>
                             </div>
                         }
-                        
+
                         <div className="space-y-1 text-center">
                             <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -98,13 +98,11 @@ const Import = () => {
                         </div>
                     </form>
 
-                    { success && <span className="badge-green w-auto">上傳成功</span> }
-                    { fail && <span className="badge-red w-auto">上傳失敗</span> }
-                    
+                    {success && <span className="badge-green w-auto">上傳成功</span>}
+                    {fail && <span className="badge-red w-auto">上傳失敗</span>}
+
                 </div>
             </div>
-            
-            
         </div>
     );
 }

@@ -1,8 +1,8 @@
 export const colorObj = {
     "吃飯":"badge-red",
     "交通":"badge-yellow",
-    "捐款":"badge-green",
-    "3C":"badge-blue",
+    "捐款":"badge-blue",
+    "3C":"badge-green",
     "衣服":"badge-indigo",
     "娛樂":"badge-purple",
     "旅遊":"badge-pink",
@@ -14,8 +14,8 @@ export const colorObj = {
 export const COLORS = {
     "吃飯":"#F87171",
     "交通":"#FBBF24",
-    "捐款":"#34D399",
-    "3C":"#60A5FA",
+    "捐款":"#60A5FA",
+    "3C":"#34D399",
     "衣服":"#818CF8",
     "娛樂":"#A78BFA",
     "旅遊":"#F472B6",

@@ -17,6 +17,10 @@ const routes = [
         component: React.lazy(() => import('../pages/Import'))
     },
     {
+        path: '/setting',
+        component: React.lazy(() => import('../pages/Setting'))
+    },
+    {
         path: '/404',
         component: React.lazy(()=> import('../components/Exception'))
     },

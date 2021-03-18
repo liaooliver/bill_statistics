@@ -2,7 +2,7 @@
 import React, { createContext, useReducer } from 'react';
 // import { getBillList } from '../services/list';
 import FetchBillReduce from '../reducer/FetchBillReduce';
-import { Redirect } from 'react-router-dom';
+
 
 // 2.Create Context Object
 export const BillListContext = createContext();
@@ -23,13 +23,15 @@ export const BillListContextProvider = ({ children }) => {
     })
 
     const postBillFile = async (file) => {
-        const data = new FormData() 
-        data.append('file', file)
+        const formData = new FormData() 
+        formData.append('file', file)
+        
         return await fetch(`uploadFile`, {
             method: 'POST',
-            body: data
+            body: formData
         }).then(response => response.json())
-
+        .catch(error => error)
+        
     }
 
     const getBillList = async (page = 0, limit = 10) => {

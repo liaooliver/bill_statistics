@@ -21,7 +21,6 @@ function App() {
       <Router>
         <InteractiveContextProvider>
           <BillListContextProvider>
-            
               <EditWindow />
               <Navigation />
               <main>
@@ -41,7 +40,6 @@ function App() {
                   </Switch>
                 </Suspense>
               </main>
-            
             <Footer />
           </BillListContextProvider>
         </InteractiveContextProvider>
