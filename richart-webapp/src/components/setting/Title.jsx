@@ -9,7 +9,7 @@ const Title = ({ title }) => {
         setOpenRemind(!openRemind)
     }
 
-    return (<h4 className="flex items-center">
+    return (<h4 className="flex items-center text-sm">
         { title }
         <QuestionMark remind={remind} />
     </h4>

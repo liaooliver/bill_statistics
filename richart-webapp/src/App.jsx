@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 // import context provider
 import { BillListContextProvider } from './context/BillListContext';
 import { InteractiveContextProvider } from './context/InteractiveContext';
+import { SettingContextProvider } from './context/SettingContext';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
       <Router>
         <InteractiveContextProvider>
           <BillListContextProvider>
+            <SettingContextProvider>
               <EditWindow />
               <Navigation />
               <main>
@@ -40,7 +42,8 @@ function App() {
                   </Switch>
                 </Suspense>
               </main>
-            <Footer />
+              <Footer />
+            </SettingContextProvider>
           </BillListContextProvider>
         </InteractiveContextProvider>
       </Router>
