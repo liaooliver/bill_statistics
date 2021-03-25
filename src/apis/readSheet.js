@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getSheet ,pagination } = require('../services/data_handle');
+const { getSheetRow ,pagination } = require('../services/data_handle');
 
 // read google sheet
 router.get('', async function (request, response) {
@@ -8,7 +8,7 @@ router.get('', async function (request, response) {
     const { page, limit } = request.query;
 
     // get sheet rows from google
-    const rows_list = await getSheet();
+    const rows_list = await getSheetRow("newbill");
     
     // make pagination
     const { totalPage, total, result } = pagination(page, limit, rows_list);

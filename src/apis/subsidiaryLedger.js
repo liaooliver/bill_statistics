@@ -1,23 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const { getSheet } = require('../services/data_handle');
+const { getSheetRow } = require('../services/data_handle');
 const { category, monthly } = require('../services/ledger_handle');
 const { scattered } = require('../services/scattered_handle');
 
 router.get('/filter_by_category', async function (request, response) {
-    const data = await getSheet();
+    const data = await getSheetRow("newbill");
     const result = category(data);
     response.json(result);
 });
 
 router.get('/filter_by_monthly', async function (request, response) {
-    const data = await getSheet();
+    const data = await getSheetRow("newbill");
     const result = monthly(data);
     response.json(result);
 });
 
 router.get('/scattered_monthly', async function (request, response) {
-    const data = await getSheet();
+    const data = await getSheetRow("newbill");
     const result = scattered(data);
     response.json(result);
 });

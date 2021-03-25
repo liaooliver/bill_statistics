@@ -1,13 +1,17 @@
 const { accessSpreadsheet } = require('../models/spreadsheet');
 
-const getSheet = async function () {
+const getSheet = async function (sheet) {
 
     // connect google sheet => doc - whole spread sheet
     const doc = await accessSpreadsheet().then(async doc => doc);
 
     // get sheet => sheets - single sheet
-    const sheets = doc.sheetsByTitle['newbill'];
+    return  doc.sheetsByTitle[sheet];
+};
 
+const getSheetRow = async function (sheet) {
+
+    const sheets = await getSheet(sheet);
     // get header name [string]
     await sheets.loadHeaderRow();
     const headerValues = sheets.headerValues;
@@ -49,5 +53,6 @@ const pagination = function (page, limit, data) {
 
 module.exports = {
     getSheet,
+    getSheetRow,
     pagination
 };

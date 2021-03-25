@@ -11,6 +11,7 @@ const uploadFile = require('./src/apis/uploadFile.controller');
 const updateSheet = require('./src/apis/updateSheet.controller');
 const readSheet = require('./src/apis/readSheet');
 const subsidiaryLedger = require('./src/apis/subsidiaryLedger');
+const setting = require('./src/apis/setting.controller');
 
 global.appRoot=path.resolve(__dirname);
 
@@ -28,6 +29,8 @@ app.use('/uploadFile', uploadFile);
 app.use('/readSheet', readSheet);
 app.use('/updateSheet', updateSheet);
 app.use('/subsidiaryLedger', subsidiaryLedger);
+app.use('/setting', setting);
+
 
 app.listen(port, () => {
     console.log("Express is Working");

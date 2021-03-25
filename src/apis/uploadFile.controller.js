@@ -5,7 +5,6 @@ const { readFile, cleansingFile, addsheetToGoogleSheet } = require('../services/
 
 // 上傳 excel 並存到 google sheet
 router.post('', uploadFile.single("file"), async (request, response) => {
-    console.log(request)
     // 1.read excel file
     const result = await readFile();
     
@@ -20,7 +19,7 @@ router.post('', uploadFile.single("file"), async (request, response) => {
         keys = [...keys, '調整後金額'];
     
         // 4.save file data
-        // await addsheetToGoogleSheet(keys, cleansing_result);
+        await addsheetToGoogleSheet(keys, cleansing_result);
     
         // 5.response
         response.setHeader('Content-Type', 'application/json');
