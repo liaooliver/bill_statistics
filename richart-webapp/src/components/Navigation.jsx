@@ -41,9 +41,11 @@ const Navigation = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
+                        {/* Logo */}
                         <div className="flex-shrink-0">
                             <img className="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow" />
                         </div>
+                        {/* Link */}
                         <div className="hidden md:block">
                             <div className="ml-10 flex items-baseline space-x-4">
                                 {
@@ -76,26 +78,13 @@ const Navigation = () => {
 
             <div className={`${isOpen ? 'block' : 'hidden'} md:hidden`}>
                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
                     {
                         links.map((item, index) => <Link key={uuidv4()} to={item.url} onClick={()=>{activeChange(index)}}
-                                className={`${item.isActive ? 'bg-gray-900' : ''} btn-link-base`}>
+                                className={`${item.isActive ? 'bg-gray-900' : ''} btn-link-base block`}>
                                 {item.text}
                             </Link>
                         )
                     }
-                    <div className={`btn-link-base`}>
-                        <Link to="/">首頁</Link>
-                    </div>
-                    <div className={`btn-link-base`}>
-                        <Link to="/list">帳單明細</Link>
-                    </div>
-                    <div className={`btn-link-base`}>
-                        <Link to="/analysis">帳單分析</Link>
-                    </div>
-                    <div className={`btn-link-base`}>
-                        <Link to="/import">匯入功能</Link>
-                    </div>
                 </div>
             </div>
         </nav>

@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const InputText = ({ register, errors }) => {
+const InputText = ({ register, errors, attr }) => {
+
+    const [initplaceholder] = useState({
+        color: '消費類別',
+        keyword: '關鍵字'
+    })
+
     return (
         <div className="w-full relative">
-            <input placeholder="關鍵字"
+            <input placeholder={ initplaceholder[attr] }
                 type="text"
                 name="keyname"
                 id="keyname"

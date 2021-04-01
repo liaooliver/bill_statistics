@@ -4,6 +4,7 @@ const getSheet = async function (sheet) {
 
     // connect google sheet => doc - whole spread sheet
     const doc = await accessSpreadsheet().then(async doc => doc);
+    console.log("google sheet =>", doc);
 
     // get sheet => sheets - single sheet
     return  doc.sheetsByTitle[sheet];
@@ -17,7 +18,8 @@ const getSheetRow = async function (sheet) {
     const headerValues = sheets.headerValues;
 
     // get all rows
-    const rows = await sheets.getRows();        
+    const rows = await sheets.getRows();    
+    // console.log("ROWS =>", rows);
 
     // combination Object
     return rows.map(row => {

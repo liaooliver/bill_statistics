@@ -3,7 +3,7 @@ import Title from './Title';
 
 const Category = ({ handleChange }) => {
     return (
-        <ul className="w-1/4 p-2">
+        <ul className="hidden sm:block w-1/4 p-2">
             <li className="hover:bg-gray-100 p-2 py-3 cursor-pointer" onClick={() => handleChange(0)}>
                 <Title title="自動分類設定"></Title>
             </li>

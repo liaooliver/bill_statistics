@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { Redirect } from "react-router-dom"
+import { SettingContext } from '../context/SettingContext';
 import Category from '../components/setting/Category';
-// import KeywordTab from '../components/setting/KeywordTab';
-// import SpendTab from '../components/setting/SpendTab';
-import SelectInput from '../components/setting/SelectInput';
-import InputText from '../components/setting/InputText';
+import SelectInput from '../components/common/SelectInput';
+import InputText from '../components/common/InputText';
 import ListOption from '../components/setting/ListOption';
+import ScaleLoading from '../components/loadingStyle/ScaleLoading';
 
 const Tabs = ({ children, index }) => {
     return (
-        <div className="w-3/4 p-2 border-l">{children[index]}</div>
+        <div className="w-full sm:w-3/4 p-2 sm:border-l">{children[index]}</div>
     )
 }
 
 const Setting = () => {
+
+    const { initSetting, keywords, categories, categoryOptions, error } = useContext(SettingContext)
 
     const { register, handleSubmit, errors } = useForm({
         mode: "onSubmit",
@@ -23,31 +26,7 @@ const Setting = () => {
     const [index, setIndex] = useState(0)
     const handleChange = (index) => setIndex(index)
 
-    useEffect(() => {
-        console.log(index)
-    }, [index])
-
-    const [key] = useState([{
-        key: "火車", category: "交通"
-    }])
-
-    const [categories] = useState([{
-        category: "交通", color: "灰色"
-    }])
-
-    const [keysCategory] = useState([
-        { value: "吃飯", text: "吃飯" },
-        { value: "交通", text: "交通" },
-        { value: "捐款", text: "捐款" },
-        { value: "3C", text: "3C" },
-        { value: "衣服", text: "衣服" },
-        { value: "娛樂", text: "娛樂" },
-        { value: "旅遊", text: "旅遊" },
-        { value: "電話", text: "電話" },
-        { value: "進修", text: "進修" },
-        { value: "其他", text: "其他"}
-    ])
-
+    // fixed
     const [colors] = useState([
         { value: "badge-gray", text: "灰色" },
         { value: "badge-red", text: "紅色" },
@@ -63,8 +42,17 @@ const Setting = () => {
         console.log(value)
     }
 
+    useEffect(() => {
+        async function init() {
+            await initSetting()
+            console.log("keywords", keywords)
+        }
+
+        init()
+    },[])
+
     return ( 
-        <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto py-6 px-3 sm:px-6 lg:px-8">
             <div className="p-3 border shadow rounded">
                 <div className="flex items-center py-2 border-b">
                     <span className="w-6 inline-block">
@@ -82,23 +70,28 @@ const Setting = () => {
                         <div>
                             <h4 className="text-sm pb-3 text-gray-700">新增關鍵字</h4>
                             <form onSubmit={handleSubmit(onSubmit)} className="flex px-3">
-                                <InputText  {...{ register , errors}} />
-                                <SelectInput {...{ register , errors }} options={keysCategory} />
+                                <InputText  {...{ register , errors}} attr={'keyword'} />
+                                <SelectInput {...{ register , errors }} options={categoryOptions}　attr={'keyword'} />
                                 <button type="submit" className="p-3 w-24 bg-yellow-400 rounded-r">儲存</button>
                             </form>
                             <h4 className="text-sm py-3 text-gray-700 mt-2">自動分類關鍵字</h4>
-                            <ListOption items={key} ></ListOption>
+                            {/* exist list */}
+
+                            <ScaleLoading /> 
+                            <ListOption items={keywords} styleType={'keyword'}></ListOption>
                         </div>
                         {/* 類別 */}
                         <div>
                             <h4 className="text-sm pb-3 text-gray-700">新增消費類別</h4>
                             <form onSubmit={handleSubmit(onSubmit)} className="flex px-3">
-                                <InputText  {...{ register , errors}} />
-                                <SelectInput {...{ register , errors }} options={colors} />
+                                <InputText  {...{ register , errors}} attr={'color'} />
+                                <SelectInput {...{ register , errors }} options={colors}　attr={'color'} />
                                 <button type="submit" className="p-3 w-24 bg-yellow-400 rounded-r">儲存</button>
                             </form>
                             <h4 className="text-sm py-3 text-gray-700 mt-2">消費類別</h4>
-                            <ListOption items={categories} ></ListOption>
+                            {/* exist list */}
+
+                            <ListOption items={categories} styleType={'color'}></ListOption>
                         </div>
                     </Tabs>
                 </div>

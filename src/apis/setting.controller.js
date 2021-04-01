@@ -49,11 +49,9 @@ router.get('/getkeys', async function (request, response) {
 // add category
 router.post('/addcategorys', async function (request, response) {
     const { body } = request;
-    
-    await (await getSheet("category")).addRow({ category: body['category'], color: body['color'] })
+    await (await getSheet("category")).addRow({ category: body['category'], color: body['color'] });
     const items = await getSheetRow("category");
     const lists = items.map(item => ({ category: item.category, color: item.color }));
-
     response.json(lists);
     /**
      * response
@@ -62,8 +60,12 @@ router.post('/addcategorys', async function (request, response) {
 });
 
 // add keyname
-router.post('/addkey', function (request, response) {
-    response.json();
+router.post('/addkey', async function (request, response) {
+    const { body } = request;
+    await (await getSheet("keywords")).addRow({ category: body['category'], color: body['color'] });
+    const items = await getSheetRow("category");
+    const lists = items.map(item => ({ key: item.keyname, category: item.category }));
+    response.json(lists);
     /**
      * response
      * [{ key: "火車", category: "交通" }...]
@@ -72,6 +74,8 @@ router.post('/addkey', function (request, response) {
 
 // delete category
 router.post('/deletecategory', function (request, response) {
+    // 先進入 sheet 中更改 category 變成 其他類
+    // 再刪除 category
     response.json();
     /**
      * response
