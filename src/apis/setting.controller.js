@@ -62,8 +62,8 @@ router.post('/addcategorys', async function (request, response) {
 // add keyname
 router.post('/addkey', async function (request, response) {
     const { body } = request;
-    await (await getSheet("keywords")).addRow({ category: body['category'], color: body['color'] });
-    const items = await getSheetRow("category");
+    await (await getSheet("keywords")).addRow({ category: body['category'], keyname: body['keyname'] });
+    const items = await getSheetRow("keywords");
     const lists = items.map(item => ({ key: item.keyname, category: item.category }));
     response.json(lists);
     /**
@@ -73,10 +73,37 @@ router.post('/addkey', async function (request, response) {
 });
 
 // delete category
-router.post('/deletecategory', function (request, response) {
-    // 先進入 sheet 中更改 category 變成 其他類
+router.post('/deletecategory', async function (request, response) {
+    const { body } = request;
+    let sheet, rows, length;
+    
+    // 先進入 newbill sheet 中更改 category 變成 其他
+    sheet = await getSheet("newbill");
+    rows = await sheet.getRows();
+    length = rows.length;
+    
+    for (let i = 0; i < length; i++){
+        if (rows[i]['類別'] === body['category']) {
+            rows[i]['類別'] = '其他';
+            await rows[i].save();
+        }
+    }
+
     // 再刪除 category
-    response.json();
+    sheet = await getSheet("category");
+    rows = await sheet.getRows();
+    length = rows.length;
+
+    for (let i = 0; i < length; i++){
+        if (rows[i]['category'] === body['category']) {
+            await rows[i].delete();
+        }
+    }
+
+    const items = await getSheetRow("category");
+    const lists = items.map(item => ({ category: item.category, color: item.color }));
+    response.json(lists);
+    
     /**
      * response
      * [{ category: "交通", color: "灰色" }...]
@@ -84,8 +111,22 @@ router.post('/deletecategory', function (request, response) {
 });
 
 // delete keyname
-router.post('/deletekey', function (request, response) {
-    response.json();
+router.post('/deletekey', async function (request, response) {
+    const { body } = request;
+    // 再刪除 category
+    const sheet = await getSheet("keywords");
+    const rows = await sheet.getRows();
+    const length = rows.length;
+
+    for (let i = 0; i < length; i++){
+        if (rows[i]['keyname'] === body['key']) {
+            await rows[i].delete();
+        }
+    }
+
+    const items = await getSheetRow("keywords");
+    const lists = items.map(item => ({ key: item.keyname, category: item.category }));
+    response.json(lists);
     /**
      * response
      * [{ key: "火車", category: "交通" }...]

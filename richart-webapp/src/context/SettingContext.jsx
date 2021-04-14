@@ -26,12 +26,48 @@ export const SettingContextProvider = ({ children }) => {
         }).catch(error => setError(true))
     }
 
+    const submitNewSetting = async (value) => {
+        const { type } = value;
 
-    
+        const api_info = type === 'keyword' ? {
+            url: 'setting/addkey',
+            setState: setKeywords
+        } : {
+                url: 'setting/addcategorys',
+                setState: setCategories
+            }
+
+        await fetch(api_info.url, {
+            method: 'POST',
+            body: JSON.stringify(value),
+            headers: { 'content-type': 'application/json' }
+        }).then(res => res.json()).then(res => api_info.setState(res))
+    }
+
+    const deleteSetting = async (value, type) => {
+        const api_info = type === 'keyword' ? {
+            url: 'setting/deletekey',
+            setState: setKeywords
+        } : {
+                url: 'setting/deletecategory',
+                setState: setCategories
+            }
+
+        await fetch(api_info.url, {
+            method: 'POST',
+            body: JSON.stringify(value),
+            headers: { 'content-type': 'application/json' }
+        }).then(res => res.json()).then(res => api_info.setState(res))
+    }
+
     return (
         <SettingContext.Provider value={{
             initSetting,
-            keywords, categories, categoryOptions
+            keywords,
+            categories,
+            categoryOptions,
+            submitNewSetting,
+            deleteSetting
         }}>{children}</SettingContext.Provider>
     )
 }

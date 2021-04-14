@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Redirect } from "react-router-dom"
 import { SettingContext } from '../context/SettingContext';
 import Category from '../components/setting/Category';
 import SelectInput from '../components/common/SelectInput';
@@ -16,13 +15,13 @@ const Tabs = ({ children, index }) => {
 
 const Setting = () => {
 
-    const { initSetting, keywords, categories, categoryOptions, error } = useContext(SettingContext)
+    const { initSetting, keywords, categories, categoryOptions, submitNewSetting } = useContext(SettingContext)
 
-    const { register, handleSubmit, errors } = useForm({
-        mode: "onSubmit",
-        reValidateMode: "onChange"
+    const { register, handleSubmit, errors, unregister } = useForm({
+        mode: "onChange"
     });
 
+    const [isloading, setIsloading] = useState(false)
     const [index, setIndex] = useState(0)
     const handleChange = (index) => setIndex(index)
 
@@ -35,23 +34,25 @@ const Setting = () => {
         { value: "badge-blue", text: "藍色" },
         { value: "badge-indigo", text: "青色" },
         { value: "badge-purple", text: "紫色" },
-        { value: "badge-pink", text: "桃紅色"}
+        { value: "badge-pink", text: "桃紅色" }
     ])
 
-    const onSubmit = (value) => {
-        console.log(value)
+    const onSubmit = async (value) => {
+        console.log(value, errors)
+        // setIsloading(true)
+        // await submitNewSetting(value)
+        // Object.keys(value).forEach(key => unregister(key))
+        // setIsloading(false)
     }
 
     useEffect(() => {
         async function init() {
             await initSetting()
-            console.log("keywords", keywords)
         }
-
         init()
-    },[])
+    }, [])
 
-    return ( 
+    return (
         <div className="max-w-4xl mx-auto py-6 px-3 sm:px-6 lg:px-8">
             <div className="p-3 border shadow rounded">
                 <div className="flex items-center py-2 border-b">
@@ -68,30 +69,46 @@ const Setting = () => {
                     <Tabs index={index}>
                         {/* 自動分類 */}
                         <div>
+                            {/* add form */}
                             <h4 className="text-sm pb-3 text-gray-700">新增關鍵字</h4>
-                            <form onSubmit={handleSubmit(onSubmit)} className="flex px-3">
-                                <InputText  {...{ register , errors}} attr={'keyword'} />
-                                <SelectInput {...{ register , errors }} options={categoryOptions}　attr={'keyword'} />
-                                <button type="submit" className="p-3 w-24 bg-yellow-400 rounded-r">儲存</button>
+                            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:flex-row px-3">
+                                <InputText  {...{ register, errors }} attr={'keyword'} />
+                                <SelectInput {...{ register, errors }} options={categoryOptions} attr={'keyword'} />
+                                <button type="submit" className="py-2 px-3 w-56 bg-yellow-400 rounded-r">
+                                    {
+                                        isloading ? <p className="flex items-center text-white font-bold"><svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>儲存中</p> : <p className="text-white font-bold">儲存</p>
+                                    }
+                                </button>
                             </form>
                             <h4 className="text-sm py-3 text-gray-700 mt-2">自動分類關鍵字</h4>
                             {/* exist list */}
-
-                            <ScaleLoading /> 
-                            <ListOption items={keywords} styleType={'keyword'}></ListOption>
+                            {
+                                keywords.length > 0 ? <ListOption items={keywords} styleType={'keyword'} /> : <ScaleLoading />
+                            }
                         </div>
                         {/* 類別 */}
                         <div>
+                            {/* add form */}
                             <h4 className="text-sm pb-3 text-gray-700">新增消費類別</h4>
                             <form onSubmit={handleSubmit(onSubmit)} className="flex px-3">
-                                <InputText  {...{ register , errors}} attr={'color'} />
-                                <SelectInput {...{ register , errors }} options={colors}　attr={'color'} />
-                                <button type="submit" className="p-3 w-24 bg-yellow-400 rounded-r">儲存</button>
+                                <InputText  {...{ register, errors }} attr={'color'} />
+                                <SelectInput {...{ register, errors }} options={colors} attr={'color'} />
+                                <button type="submit" className="py-2 px-3 w-56 bg-yellow-400 rounded-r">
+                                    {
+                                        isloading ? <p className="flex items-center text-white font-bold"><svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>儲存中</p> : <p className="text-white font-bold">儲存</p>
+                                    }
+                                </button>
                             </form>
                             <h4 className="text-sm py-3 text-gray-700 mt-2">消費類別</h4>
-                            {/* exist list */}
-
-                            <ListOption items={categories} styleType={'color'}></ListOption>
+                            {
+                                categories.length > 0 ? <ListOption items={categories} styleType={'color'} /> : <ScaleLoading />
+                            }
                         </div>
                     </Tabs>
                 </div>
@@ -99,5 +116,5 @@ const Setting = () => {
         </div>
     );
 }
- 
+
 export default Setting;

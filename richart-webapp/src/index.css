@@ -4,28 +4,28 @@
 
 @layer components{
     .badge-gray{
-        @apply px-2 w-10 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-gray-100 text-gray-800;
+        @apply px-2 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-gray-100 text-gray-800;
     }
     .badge-red{
-        @apply px-2 w-10 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-red-100 text-red-800;
+        @apply px-2 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-red-100 text-red-800;
     }
     .badge-yellow{
-        @apply px-2 w-10 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800;
+        @apply px-2 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800;
     }
     .badge-green{
-        @apply px-2 w-10 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-green-100 text-green-800;
+        @apply px-2 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-green-100 text-green-800;
     }
     .badge-blue{
-        @apply px-2 w-10 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-blue-100 text-blue-800;
+        @apply px-2 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-blue-100 text-blue-800;
     }
     .badge-indigo{
-        @apply px-2 w-10 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-indigo-100 text-indigo-800;
+        @apply px-2 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-indigo-100 text-indigo-800;
     }
     .badge-purple{
-        @apply px-2 w-10 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-purple-100 text-purple-800;
+        @apply px-2 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-purple-100 text-purple-800;
     }
     .badge-pink{
-        @apply px-2 w-10 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-pink-100 text-pink-800;
+        @apply px-2 inline-block text-xs text-center leading-5 font-semibold rounded-full bg-pink-100 text-pink-800;
     }
     .btn-outline-none{
         @apply outline-none active:outline-none focus:outline-none;

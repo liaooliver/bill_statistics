@@ -62,6 +62,7 @@ const Import = () => {
     return (
         <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
             <div className="px-4 sm:px-0">
+
                 <div className="mb-24">
                     <form
                         onDrop={e => handleDrop(e)}
@@ -100,7 +101,7 @@ const Import = () => {
 
                     {success && <span className="badge-green w-auto">上傳成功</span>}
                     {fail && <span className="badge-red w-auto">上傳失敗</span>}
-
+                    <p className="font-medium text-xs text-red-400">*目前僅接受由台新數位銀行 Richart 所匯出的信用卡帳單 excel 檔案。</p>
                 </div>
             </div>
         </div>
