@@ -6,18 +6,21 @@ const { scattered } = require('../services/scattered_handle');
 
 router.get('/filter_by_category', async function (request, response) {
     const data = await getSheetRow("newbill");
+    if(data.length === 0) return response.json([]);
     const result = category(data);
     response.json(result);
 });
 
 router.get('/filter_by_monthly', async function (request, response) {
     const data = await getSheetRow("newbill");
+    if(data.length === 0) return response.json([]);
     const result = monthly(data);
     response.json(result);
 });
 
 router.get('/scattered_monthly', async function (request, response) {
     const data = await getSheetRow("newbill");
+    if(data.length === 0) return response.json([]);
     const result = scattered(data);
     response.json(result);
 });

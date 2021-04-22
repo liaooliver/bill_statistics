@@ -11,10 +11,8 @@ router.post('', uploadFile.single("file"), async (request, response) => {
     // 2.clean file data
     const cleansing_result = await cleansingFile(result, response);
 
-    //
     if (cleansing_result.length > 0) {
         // 3.get header row
-        
         let keys = Object.keys(cleansing_result[0]);
         keys = [...keys, '調整後金額'];
     

@@ -6,6 +6,7 @@ import PieChartComponent from './PieChart';
 import TableClassic from './TableClassic';
 
 const RenderAnalysis = ({ monthly, category, scattered }) => {
+
     return (
         <>
             <div className="mb-3">

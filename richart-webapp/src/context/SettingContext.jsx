@@ -67,7 +67,8 @@ export const SettingContextProvider = ({ children }) => {
             categories,
             categoryOptions,
             submitNewSetting,
-            deleteSetting
+            deleteSetting,
+            error
         }}>{children}</SettingContext.Provider>
     )
 }

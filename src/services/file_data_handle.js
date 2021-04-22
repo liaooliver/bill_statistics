@@ -2,6 +2,8 @@ const XLSX = require('xlsx');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const { accessSpreadsheet } = require('../models/spreadsheet');
+const { getSheetRow } = require('../services/data_handle');
+const { list } = require('postcss');
 
 const readFile = async function () {
     const filePath = global.appRoot + '/src/uploads/richart.xlsx';
@@ -17,19 +19,27 @@ const readFile = async function () {
 /**
  * @param {Array} file - from read file result
  */
-const cleansingFile = function (file) {
+const cleansingFile = async function (file) {
 
     let keys = Object.keys(file[0]);
     // verification header format
     const headFormat = ['消費日期', '入帳日期', '卡別', '金額', '消費明細', '外幣幣別與金額', '類別', '備忘錄'];
     const verification = headFormat.every((item, index) => item === keys[index]);
 
+    // get assort category
+    const items = await getSheetRow("keywords");
+    const lists = items.map(item => ({ key: item.keyname, category: item.category }));
+
     if (verification) {
         return file.map(item => {
+
+            // automatically assort
+            if (lists.length > 0) {
+                lists.forEach(list => {
+                    if (item['消費明細'].includes(list.key)) item['類別'] = list.category;
+                });
+            }
             
-            if (item['消費明細'].includes('高鐵')) item['類別'] = '交通';
-            if (item['消費明細'].includes('基金會')) item['類別'] = '捐款';
-    
             if (item['金額'].includes('-NT$')) {
                 item['金額'] = item['金額'].replace('-NT$', '-');
             } else {

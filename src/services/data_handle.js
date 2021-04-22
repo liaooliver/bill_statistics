@@ -10,16 +10,16 @@ const getSheet = async function (sheet) {
 };
 
 const getSheetRow = async function (sheet) {
-
+    
     const sheets = await getSheet(sheet);
+    if (sheets === undefined) return [];
+    
     // get header name [string]
     await sheets.loadHeaderRow();
     const headerValues = sheets.headerValues;
 
     // get all rows
     const rows = await sheets.getRows();    
-
-    // console.log("ROWS =>", rows);
 
     // combination Object
     return rows.map(row => {

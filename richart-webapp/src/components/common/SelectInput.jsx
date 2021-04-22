@@ -3,10 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 const SelectInput = ({ register, errors, options, attr, ...rest }) => {
 
-    const [initOption] = useState({
-        color: '請選擇代表色',
-        keyword: '請選擇類別'
-    })
+    // const [initOption] = useState({
+    //     color: '請選擇代表色',
+    //     keyword: '請選擇類別'
+    // })
 
     const [initKey] = useState({
         color: 'color',

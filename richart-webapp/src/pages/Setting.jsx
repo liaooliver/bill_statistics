@@ -38,11 +38,10 @@ const Setting = () => {
     ])
 
     const onSubmit = async (value) => {
-        console.log(value, errors)
-        // setIsloading(true)
-        // await submitNewSetting(value)
-        // Object.keys(value).forEach(key => unregister(key))
-        // setIsloading(false)
+        setIsloading(true)
+        await submitNewSetting(value)
+        Object.keys(value).forEach(key => unregister(key))
+        setIsloading(false)
     }
 
     useEffect(() => {

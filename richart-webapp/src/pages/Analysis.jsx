@@ -4,6 +4,16 @@ import RenderAnalysis from '../components/statistics/RenderAnalysis';
 import ScaleLoading from '../components/loadingStyle/ScaleLoading';
 import { StatisticsContextProvider, StatisticsContext } from '../context/StatisticsContext';
 
+const CheckingData = ({ haveData, scattered, monthly, category }) => {
+    return (
+        <>
+            {
+                haveData ? <RenderAnalysis scattered={scattered} monthly={monthly} category={category} /> : <div className="font-bold text-center text-md text-red-600 mb-3">Oops! 無資料！請先上傳檔案</div>
+            }
+        </>
+    )
+}
+
 // Context Provider
 const FetchStatisticsData = () => {
 
@@ -12,6 +22,7 @@ const FetchStatisticsData = () => {
     const [monthly, setMonthly] = useState();
     const [loading, setLoading] = useState(false);
     const [scattered, setScattered] = useState();
+    const [haveData, setHaveData] = useState(true)
     const history = useHistory();
 
     useEffect(() => {
@@ -27,11 +38,18 @@ const FetchStatisticsData = () => {
             setLoading(true)
         } else {
             Promise.all([category(), monthly(), scatter()]).then(res => {
-                setCategory(res[0])
-                setMonthly(res[1])
-                setScattered(res[2])
-                setLoading(true)
-                sessionStorage.setItem("StatisticsData", JSON.stringify(res))
+                const verification = res.every(item => item.length === 0 ? false : true)
+                if (verification) {
+                    setCategory(res[0])
+                    setMonthly(res[1])
+                    setScattered(res[2])
+                    setHaveData(true)
+                    setLoading(true)
+                    sessionStorage.setItem("StatisticsData", JSON.stringify(res))
+                } else {
+                    setHaveData(false)
+                    setLoading(true)
+                }
             }).catch(error => history.push('/500'))
         }
     }, [])
@@ -39,7 +57,8 @@ const FetchStatisticsData = () => {
     return (
         <>
             {
-                loading ? <RenderAnalysis
+                loading ? <CheckingData
+                    haveData={haveData}
                     scattered={scattered}
                     monthly={monthly}
                     category={category} /> : <ScaleLoading />

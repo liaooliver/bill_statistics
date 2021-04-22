@@ -36,8 +36,8 @@ const LoadingRow = () => {
 }
 
 const RenderRow = ({ data, activeEdit }) => {
-    
-    return (  
+
+    return (
         <tr>
             <td className="px-6 py-4 whitespace-nowrap">
                 <div>{data['消費日期']}</div>
@@ -46,10 +46,10 @@ const RenderRow = ({ data, activeEdit }) => {
                 <div>{data['卡別']}</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div>{ displayNTD(data['金額']) }</div>
+                <div>{displayNTD(data['金額'])}</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div>{ displayNTD(data['調整後金額']) }</div>
+                <div>{displayNTD(data['調整後金額'])}</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
                 <div>{data['消費明細']}</div>
@@ -63,7 +63,7 @@ const RenderRow = ({ data, activeEdit }) => {
                 {data['備忘錄']}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button onClick={()=> activeEdit(data)} className="py-1 px-3 btn-outline-none btn-rounded btn-color-indigo">編輯</button>
+                <button onClick={() => activeEdit(data)} className="py-1 px-3 btn-outline-none btn-rounded btn-color-indigo">編輯</button>
             </td>
         </tr>
     )
@@ -75,10 +75,21 @@ const TableBody = ({ loading, data }) => {
     const { setOpenEditMode, setBillDetail } = useContext(InteractiveContext);
 
     useEffect(() => {
-        
+
         const activeEdit = (data) => {
             setBillDetail(data)
             setOpenEditMode(true)
+        }
+    
+        const renderObj = (data) => {
+            const rowObj = data && data.map((item) =>
+                <RenderRow
+                    key={uuidv4()}
+                    data={item}
+                    activeEdit={activeEdit}
+                />
+            )
+            setRows(rowObj)
         }
 
         if (loading === true) {
@@ -88,20 +99,11 @@ const TableBody = ({ loading, data }) => {
             }
             setRows(rowsObj)
         } else {
-            let renderObj = data && data.map((item) =>
-                <RenderRow
-                    key={uuidv4()}
-                    data={item}
-                    activeEdit={activeEdit}
-                />
-            )
-            setRows(renderObj)
+            renderObj(data)
         }
 
     }, [loading, data, setOpenEditMode, setBillDetail])
     
-
-
     return (
         <tbody className={`bg-white divide-y divide-gray-200 ${loading ? "animate-pulse" : ""}`}>
             {rows}

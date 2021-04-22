@@ -9,8 +9,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const uploadFile = require('./src/apis/uploadFile.controller');
 const updateSheet = require('./src/apis/updateSheet.controller');
-const readSheet = require('./src/apis/readSheet');
-const subsidiaryLedger = require('./src/apis/subsidiaryLedger');
+const readSheet = require('./src/apis/readSheet.controller');
+const subsidiaryLedger = require('./src/apis/subsidiaryLedger.controller');
 const setting = require('./src/apis/setting.controller');
 
 global.appRoot=path.resolve(__dirname);
