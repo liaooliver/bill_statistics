@@ -21,7 +21,8 @@ deploy:
   provider: heroku
   api_key: $HEROKU_API_KEY
   app: creditbill
-  script: 
-    heroku container:release web
+  script:
+    heroku container:release web;
+    docker container ps
   on:
     branch: master
