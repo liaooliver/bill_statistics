@@ -14,14 +14,14 @@ script:
   - docker build -t oliver79913/creditbill .
   - docker tag oliver79913/creditbill registry.heroku.com/creditbill/web
   - docker image ls
-  - docker push oliver79913/creditbill
-  - docker push registry.heroku.com/creditbill/web
 
 deploy:
   provider: heroku
   api_key: $HEROKU_API_KEY
   app: creditbill
   script:
+    docker push oliver79913/creditbill;
+    docker push registry.heroku.com/creditbill/web;
     heroku container:push web -a creditbill
   on:
     branch: master
