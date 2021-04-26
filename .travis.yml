@@ -22,8 +22,7 @@ deploy:
   api_key: $HEROKU_API_KEY
   app: creditbill
   script:
-    heroku container:push release;
-    heroku container:release web release
+    heroku container:push web -a creditbill
   on:
     branch: master
 
