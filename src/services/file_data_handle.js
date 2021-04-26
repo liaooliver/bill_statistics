@@ -3,7 +3,6 @@ const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const { accessSpreadsheet } = require('../models/spreadsheet');
 const { getSheetRow } = require('../services/data_handle');
-const { list } = require('postcss');
 
 const readFile = async function () {
     const filePath = global.appRoot + '/src/uploads/richart.xlsx';
