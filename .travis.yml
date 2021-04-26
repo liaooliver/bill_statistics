@@ -1,6 +1,7 @@
 language: node_js
 node_js:
-  - 7
+  - 14
+  - 13
 
 services:
   - docker
