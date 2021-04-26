@@ -28,7 +28,7 @@ app.use('/setting', setting);
 app.use(express.static(`${__dirname}/richart-webapp/build`));
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
+    res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.listen(port, () => {
