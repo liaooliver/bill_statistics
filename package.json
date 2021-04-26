@@ -18,8 +18,8 @@
     "read-excel-file": "^5.0.0"
   },
   "scripts": {
-    "lint": "eslint app.js",
-    "start": "nodemon app.js",
+    "lint": "eslint index.js",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

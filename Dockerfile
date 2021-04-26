@@ -16,4 +16,4 @@ COPY . /usr/src/app
 EXPOSE 8080
 
 # 設定預設指令
-CMD node app.js
+CMD node index.js
