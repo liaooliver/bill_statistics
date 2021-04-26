@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - 7
+
+services:
+  - docker
+
+before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com
+
+script:
+  - docker build -t oliver79913/$HEROKU_APP_NAME .
+  - docker tag oliver79913/$HEROKU_APP_NAME registry.heroku.com/$HEROKU_APP_NAME/web
+  - docker image ls
+
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: $HEROKU_APP_NAME
+  script: 
+    docker push oliver79913/$HEROKU_APP_NAME;
+    docker push registry.heroku.com/$HEROKU_APP_NAME/web;
+    heroku container:push web
+  on:
+    branch: master
