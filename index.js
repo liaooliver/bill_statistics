@@ -4,6 +4,10 @@ const port = 8080;
 
 require('dotenv').config();
 
+global.appRoot = path.resolve(__dirname);
+global.client_email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+global.client_key = process.env.GOOGLE_PRIVATE_KEY;
+
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -12,10 +16,6 @@ const updateSheet = require('./src/apis/updateSheet.controller');
 const readSheet = require('./src/apis/readSheet.controller');
 const subsidiaryLedger = require('./src/apis/subsidiaryLedger.controller');
 const setting = require('./src/apis/setting.controller');
-
-global.appRoot = path.resolve(__dirname);
-global.client_email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-global.client_key = process.env.GOOGLE_PRIVATE_KEY;
 
 app.use(cors());
 app.use(bodyParser.json());
