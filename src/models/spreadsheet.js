@@ -1,10 +1,10 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 
+const auth_token = process.env.GOOGLE_AUTH_TOKEN;
+const client_email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+const private_key = process.env.GOOGLE_PRIVATE_KEY;
+
 async function accessSpreadsheet() {
-    
-    const auth_token = global.auth_token;
-    const client_email = global.client_email;
-    const private_key = global.client_key;
 
     const doc = new GoogleSpreadsheet(auth_token);
     await doc.useServiceAccountAuth({

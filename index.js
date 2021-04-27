@@ -1,16 +1,15 @@
+require('dotenv').config();
+global.client_email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+global.client_key = process.env.GOOGLE_PRIVATE_KEY;
+global.auth_token = process.env.GOOGLE_AUTH_TOKEN;
+
 const express = require('express');
 const app = express();
 const port = 8080;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
-
-require('dotenv').config();
-
 global.appRoot = path.resolve(__dirname);
-global.client_email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-global.client_key = process.env.GOOGLE_PRIVATE_KEY;
-global.auth_token = process.env.GOOGLE_AUTH_TOKEN;
 
 const uploadFile = require('./src/apis/uploadFile.controller');
 const updateSheet = require('./src/apis/updateSheet.controller');
@@ -21,6 +20,8 @@ const setting = require('./src/apis/setting.controller');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+console.log(global.auth_token, typeof global.auth_token);
 
 app.use('/uploadFile', uploadFile);
 app.use('/readSheet', readSheet);
