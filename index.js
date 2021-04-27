@@ -19,18 +19,18 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(express.static(__dirname + '/build'));
-
-app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname));
-});
-
 app.use('/uploadFile', uploadFile);
 app.use('/readSheet', readSheet);
 app.use('/updateSheet', updateSheet);
 app.use('/subsidiaryLedger', subsidiaryLedger);
 app.use('/setting', setting);
 
+app.use(express.static(path.join(__dirname, 'richart-webapp/build')));
+
+app.get('/', function (req, res) {
+    
+  res.sendFile(path.join(__dirname, 'richart-webapp/build', 'index.html'));
+});
 
 app.listen(port, () => {
     console.log("Express is Working");
