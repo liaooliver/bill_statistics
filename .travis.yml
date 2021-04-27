@@ -10,21 +10,20 @@ before_install:
   - docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com
 
 script:
-  - docker build -t oliver79913/creditbill .
-  - docker tag oliver79913/creditbill registry.heroku.com/creditbill/web
+  - docker build -t oliver79913/$HEROKU_APP_NAME .
+  - docker tag oliver79913/$HEROKU_APP_NAME registry.heroku.com/$HEROKU_APP_NAME/web
   - docker image ls
-  - docker push oliver79913/creditbill:latest
 
-# deploy:
-#   provider: heroku
-#   api_key: $HEROKU_API_KEY
-#   app: creditbill
-#   script:
-#     docker push oliver79913/creditbill;
-#     docker push registry.heroku.com/creditbill/web;
-#     heroku container:push web
-#   on:
-#     branch: master
+before_deploy:
+  - docker push oliver79913/$HEROKU_APP_NAME:latest
+  - docker push registry.heroku.com/$HEROKU_APP_NAME/web
+
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: $HEROKU_APP_NAME
+  script:
+    heroku container:push web
 
 # after_deploy:
 #   - docker image ls

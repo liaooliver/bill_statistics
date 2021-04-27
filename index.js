@@ -32,6 +32,6 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'richart-webapp/build', 'index.html'));
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
     console.log("Express is Working");
 });
