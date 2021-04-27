@@ -1,7 +1,7 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 
 async function accessSpreadsheet() {
-    const doc = new GoogleSpreadsheet('1tloIdgp49FCRyS2vg6ShKSTw-02f_6Cb9xCXlxfI_YI');
+    const doc = new GoogleSpreadsheet(global.auth_token);
     await doc.useServiceAccountAuth({
         // eslint-disable-next-line no-undef
         client_email: global.client_email,
