@@ -10,7 +10,7 @@ require('dotenv').config();
 global.appRoot = path.resolve(__dirname);
 global.client_email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
 global.client_key = process.env.GOOGLE_PRIVATE_KEY;
-global.auth_token = process.env.GOOGLE_AUTH_TOKEN
+global.auth_token = process.env.GOOGLE_AUTH_TOKEN;
 
 const uploadFile = require('./src/apis/uploadFile.controller');
 const updateSheet = require('./src/apis/updateSheet.controller');

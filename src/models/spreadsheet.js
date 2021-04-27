@@ -1,12 +1,17 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 
 async function accessSpreadsheet() {
-    const doc = new GoogleSpreadsheet(global.auth_token);
+    
+    const auth_token = global.auth_token;
+    const client_email = global.client_email;
+    const private_key = global.client_key;
+
+    const doc = new GoogleSpreadsheet(auth_token);
     await doc.useServiceAccountAuth({
         // eslint-disable-next-line no-undef
-        client_email: global.client_email,
+        client_email,
         // eslint-disable-next-line no-undef
-        private_key: global.client_key,
+        private_key,
     });
     await doc.loadInfo(); // loads sheets
     return doc;
