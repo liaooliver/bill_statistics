@@ -6,7 +6,6 @@ services:
   - docker
 
 before_install:
-  - npm cache clean --force
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com
 
