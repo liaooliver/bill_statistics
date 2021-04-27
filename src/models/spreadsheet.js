@@ -1,6 +1,8 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 
 async function accessSpreadsheet() {
+    console.log("accessSpreadsheet =>", global.client_email);
+    console.log("accessSpreadsheet =>", global.client_key);
     const doc = new GoogleSpreadsheet('1tloIdgp49FCRyS2vg6ShKSTw-02f_6Cb9xCXlxfI_YI');
     await doc.useServiceAccountAuth({
         // eslint-disable-next-line no-undef

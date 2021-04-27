@@ -35,6 +35,5 @@ app.get('/*', function (req, res) {
 });
 
 app.listen(process.env.PORT || port, () => {
-    console.log(global.client_email, global.client_key);
     console.log("Express is Working");
 });
