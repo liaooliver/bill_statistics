@@ -7,13 +7,13 @@ const private_key = process.env.GOOGLE_PRIVATE_KEY;
 async function accessSpreadsheet() {
     console.log("accessSpreadsheet: =>", auth_token);
     const doc = new GoogleSpreadsheet(auth_token);
-    console.log("accessSpreadsheet: =>", doc);
     await doc.useServiceAccountAuth({
         // eslint-disable-next-line no-undef
         client_email,
         // eslint-disable-next-line no-undef
         private_key,
     });
+    console.log("accessSpreadsheet: =>", doc);
     await doc.loadInfo(); // loads sheets
     return doc;
 }
