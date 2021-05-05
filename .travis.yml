@@ -20,7 +20,7 @@ before_deploy:
 
 deploy:
   provider: heroku
-  api_key: $HEROKU_API_KEY
+  api_key: $HEROKU_AUTH_TOKEN
   app: $HEROKU_APP_NAME
   script:
     heroku container:push web
