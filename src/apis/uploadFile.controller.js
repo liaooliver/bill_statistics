@@ -9,7 +9,7 @@ router.post('', uploadFile.single("file"), async (request, response) => {
     const result = await readFile();
     
     // 2.clean file data
-    const cleansing_result = await cleansingFile(result, response);
+    const cleansing_result = await cleansingFile(result);
 
     if (cleansing_result.length > 0) {
         // 3.get header row

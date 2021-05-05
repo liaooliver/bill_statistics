@@ -57,12 +57,11 @@ const addsheetToGoogleSheet = async function (keys, cleansingFile_result) {
     const doc = await accessSpreadsheet().then(async doc => doc);
     const sheets = doc.sheetsByTitle['newbill'];
     
-    if (sheets) {
-        await sheets.delete();
-        addGoogleSheet(doc, keys, cleansingFile_result);
-    } else {
-        addGoogleSheet(doc, keys, cleansingFile_result);
-    }
+    // 判斷 google sheet 是否已經有資料
+    if (sheets) await sheets.delete();
+
+    // add sheet to google
+    addGoogleSheet(doc, keys, cleansingFile_result);
 };
 
 const addGoogleSheet = async function (doc, keys, cleansingFile_result) {

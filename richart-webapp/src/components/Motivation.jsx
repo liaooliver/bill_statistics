@@ -10,14 +10,13 @@ const Motivation = () => {
                     <span className="font-bold">形象首頁</span>、
                     <span className="font-bold">帳單明細</span>、
                     <span className="font-bold">帳單分析</span>、
-                    <span className="font-bold">匯入帳單</span>
+                    <span className="font-bold">匯入帳單</span>、
+                    <span className="font-bold">設定功能</span>
                 等功能的 demo APP。<br />
             </p>
             <p className="mb-3 tracking-wide">
-                並且在程式中
-                <span className="font-bold">撰寫測試程式</span>與
-                <span className="font-bold">使用自動化佈署</span>的相關技術，
-                企圖擴大此 APP 的完整性，從原本自己使用的小工具轉型成為一個 side project。
+                並且在專案上<span className="font-bold">使用自動化佈署(CI/CD)</span>，
+                使 APP 的完整度提高，從原本自己使用的小工具轉型成為一個前端+後端搭配 CI/CD 的 side project。
             </p>
         </div>
     );

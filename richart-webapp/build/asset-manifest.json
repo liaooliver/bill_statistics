@@ -5,8 +5,8 @@
     "static/js/1.f1118735.chunk.js": "/static/js/1.f1118735.chunk.js",
     "static/js/1.f1118735.chunk.js.map": "/static/js/1.f1118735.chunk.js.map",
     "main.css": "/static/css/main.041460ad.chunk.css",
-    "main.js": "/static/js/main.6049b59f.chunk.js",
-    "main.js.map": "/static/js/main.6049b59f.chunk.js.map",
+    "main.js": "/static/js/main.8099c7a9.chunk.js",
+    "main.js.map": "/static/js/main.8099c7a9.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.6c6e47e5.js",
     "runtime-main.js.map": "/static/js/runtime-main.6c6e47e5.js.map",
     "static/js/4.2a3121b4.chunk.js": "/static/js/4.2a3121b4.chunk.js",
@@ -27,11 +27,11 @@
     "static/css/main.041460ad.chunk.css.map": "/static/css/main.041460ad.chunk.css.map",
     "static/js/4.2a3121b4.chunk.js.LICENSE.txt": "/static/js/4.2a3121b4.chunk.js.LICENSE.txt",
     "static/js/5.08eaf332.chunk.js.LICENSE.txt": "/static/js/5.08eaf332.chunk.js.LICENSE.txt",
-    "static/media/aws.98c46103.svg": "/static/media/aws.98c46103.svg",
     "static/media/cakeresume.1073eae4.png": "/static/media/cakeresume.1073eae4.png",
     "static/media/file-type-docker.a80da7d7.svg": "/static/media/file-type-docker.a80da7d7.svg",
     "static/media/github-icon.35a32422.svg": "/static/media/github-icon.35a32422.svg",
     "static/media/google.8a4e5b51.svg": "/static/media/google.8a4e5b51.svg",
+    "static/media/heroku-icon.f919a7f7.svg": "/static/media/heroku-icon.f919a7f7.svg",
     "static/media/linkedin.7defd339.svg": "/static/media/linkedin.7defd339.svg",
     "static/media/medium.8407b8e1.svg": "/static/media/medium.8407b8e1.svg",
     "static/media/node.98c95ba8.svg": "/static/media/node.98c95ba8.svg",
@@ -47,6 +47,6 @@
     "static/js/runtime-main.6c6e47e5.js",
     "static/js/5.08eaf332.chunk.js",
     "static/css/main.041460ad.chunk.css",
-    "static/js/main.6049b59f.chunk.js"
+    "static/js/main.8099c7a9.chunk.js"
   ]
 }

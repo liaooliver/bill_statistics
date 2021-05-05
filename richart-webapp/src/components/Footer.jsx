@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="bg-gray-500 w-full">
                 <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-white md:flex justify-between items-center">
                     <div className="mb-6 md:m-0">
-                        <span className="font-bold">Last modified:</span> 2021年02月18日, by Oliver
+                        <span className="font-bold">Last modified:</span> 2021年05月05日, by Oliver
                     </div>
                     <SocialGroup />
                 </div>

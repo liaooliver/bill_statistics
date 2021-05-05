@@ -8,7 +8,7 @@ import nodeIcon from '../assets/icons/node.svg';
 import dockerIcon from '../assets/icons/file-type-docker.svg';
 import githubIcon from '../assets/icons/github-icon.svg';
 import travisIcon from '../assets/icons/travis-ci.svg';
-import awsIcon from '../assets/icons/aws.svg';
+import herokuIcon from '../assets/icons/heroku-icon.svg';
 import googleIcon from '../assets/icons/google.svg';
 import '../assets/custom.css';
 
@@ -71,10 +71,10 @@ const TechGroup = () => {
                     title: 'Docker'
                 },
                 {
-                    icon: awsIcon,
-                    alt: 'awsIcon',
+                    icon: herokuIcon,
+                    alt: 'herokuIcon',
                     size: '70%',
-                    title: 'AWS S3'
+                    title: 'Heroku'
                 }
             ]
         }
